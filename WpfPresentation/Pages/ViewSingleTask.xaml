@@ -1,0 +1,99 @@
+﻿<!--  
+<summary>
+Creator:  Josh Nicholson
+Created:  2025/03/06
+Summary:  View a single task
+Last updated by: Stan Anderson
+Last updated: 2025-04-07
+Changes: Updated UI
+</summary>
+-->
+    <Page x:Class="WpfPresentation.Pages.viewSingleTask"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="viewSingleTask">
+
+    <Grid>
+        <!-- Outer Page Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!-- Inner Page Grid -->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Label x:Name="lblTaskID" Content="Task ID: " FontSize="20" FontWeight="Bold" Opacity="0"/>
+            </Grid>
+            <Label x:Name="lblTaskName" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelTop}" Content="Task Name"/>
+            <TextBox x:Name="txtTaskName" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBottom}" IsEnabled="False"/>
+
+            <Label x:Name="lblTaskType" Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelTop}" Content="Task Type"/>
+            <TextBox x:Name="txtTaskType" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBottom}" IsEnabled="False"/>
+
+            <Label x:Name="lblTaskDate" Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelTop}" Content="Task Date"/>
+            <TextBox x:Name="txtTaskDate" Grid.Row="5" Grid.Column="1" Style="{StaticResource TextBottom}" IsEnabled="False"/>
+
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblTaskActive" Grid.Column="0" Style="{StaticResource LabelLeft}" Content="Task Activity Status"/>
+                <CheckBox x:Name="chbTaskActive" Grid.Column="1" IsEnabled="False"/>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height=".5*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lblTaskDesc" Grid.Row="0" Style="{StaticResource LabelTop}" Content="Task Description"/>
+            <TextBox x:Name="txtTaskDesc" Grid.Row="1" Style="{StaticResource Description}" IsEnabled="False"/>
+
+            
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Button x:Name="btnEdit" Content="Edit" Style="{StaticResource WarningButton}" Click="btnEdit_Click"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Button x:Name="btnDelete" Content="Delete" Style="{StaticResource DangerButton}" Click="btnDelete_Click"/>
+            </Grid>
+        <Grid Grid.Column="2">
+                <Button x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

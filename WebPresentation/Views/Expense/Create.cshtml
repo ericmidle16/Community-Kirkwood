@@ -1,0 +1,72 @@
+﻿@* <summary> *@
+@*      Creator:  Eric Idle *@
+@*      Created:  2025/04/10 *@
+@*      Summary:  The create view for creating a new expense for a specific project *@
+@*      Last Updated By: Skyann Heintz *@
+@*      Last Updated: 2025-05-01 *@
+@*      What was Changed: Added styling *@
+@* </summary> *@
+
+@model DataDomain.Expense
+
+@{
+    ViewData["Title"] = "Create";
+    IEnumerable<string> expenseTypeIDs = ViewBag.ExpenseTypeIDs;
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create Expense</h2>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @*<div class="form-group">
+                        <label asp-for="ExpenseID" class="control-label" hidden></label>
+                        <input asp-for="ExpenseID" class="form-control" hidden />
+                        <span asp-validation-for="ExpenseID" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="ProjectID" class="control-label" hidden></label>
+                        <input asp-for="ProjectID" class="form-control" hidden />
+                        <span asp-validation-for="ProjectID" class="text-danger" hidden></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ExpenseTypeID" class="control-label">Expense Type</label>
+                        @*<input asp-for="ExpenseTypeID" class="form-control" />*@
+                        @Html.DropDownListFor(m => m.ExpenseTypeID,
+                                 new SelectList(expenseTypeIDs),
+                                 "Set Expense Type",
+                                 new { @class = "form-control" })
+                        <span asp-validation-for="ExpenseTypeID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Date" class="control-label"></label>
+                        <input asp-for="Date" class="form-control" type="date"/>
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-secondary ml-3" asp-route-projectId="@Model.ProjectID">Back to Expenses</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,47 @@
+﻿<!--
+/// <summary>
+/// Creator:    Chase Hannen
+/// Created:    2025/04/04
+/// Summary:    The XAML code for the View Assigned Projects page
+/// Last Updated By: Stan Anderson
+/// Last Updated: 2025/04/07
+/// What was Changed: UI updates
+/// </summary>    
+-->
+<Page x:Class="WpfPresentation.Pages.viewAssignedProjects"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="viewAssignedProjects" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="tbkViewAssignedProjects" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}">My Projects</Label>
+        <DataGrid x:Name="grdProjects" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3" AutoGeneratingColumn="grdProjects_AutoGeneratingColumn"/>
+
+        <Button x:Name="btnViewProfile" Content="View Profile" Grid.Row="2" Grid.Column="1" Style="{StaticResource CallToActionSecondary}" Click="btnViewProfile_Click"/>
+
+        <Button x:Name="btnViewProject" Content="View Project" Grid.Row="2" Grid.Column="2" Style="{StaticResource CallToActionSecondary}" Click="btnViewProject_Click"/>
+
+        <Button x:Name="btnBack" Grid.Row="2" Grid.Column="3" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,61 @@
+﻿<!--
+    <Summary>
+    Creator: Eric Idle
+    Created: 2025/04/11
+    Summary: Xaml page for assigning/unassigning project roles. 
+    Last Updated By:
+    Last Updated:
+    </Summary>
+-->
+    <Page x:Class="WpfPresentation.Pages.UpdateUserProjectRole"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="UpdateUserProjectRole">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Project Roles" Style="{StaticResource TitleLabel}"/>
+
+        <Label Grid.Row="1" Grid.Column="1" x:Name="lblUnassignedRole" Style="{StaticResource LabelTop}" FontWeight="Bold" Content="Unassigned Roles: " />
+
+        <DataGrid x:Name="grdUnassignedRoleList" Grid.Row="2" Grid.Column="1" SelectionMode="Extended" SelectionUnit="FullRow" IsReadOnly="True" Margin="0,0,10,0"
+        ColumnWidth="SizeToCells" AutoGenerateColumns="False" ItemsSource="{Binding}" Height="Auto" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Role" Binding="{Binding ProjectRoleID}" Width="100" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Grid.Row="1" Grid.Column="2" x:Name="lblAssignedRole" Content="Assigned Roles: " Style="{StaticResource LabelTop}"/>
+        <DataGrid x:Name="grdAssignedRoleList" Grid.Row="2" Grid.Column="2" SelectionMode="Extended" SelectionUnit="FullRow" IsReadOnly="True" Margin="10,0,0,0"
+ColumnWidth="SizeToCells" AutoGenerateColumns="False" ItemsSource="{Binding}" Height="Auto" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Role" Binding="{Binding ProjectRoleID}" Width="100" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="3" Grid.Column="1" x:Name="btnAddRole" Content="Assign Role" Style="{StaticResource CallToAction}" Click="btnAddRole_Click" />
+        <Button Grid.Row="3" Grid.Column="2" x:Name="btnRemoveRole" Content="Unassign Role" Style="{StaticResource DangerButton}" Click="btnRemoveRole_Click"  />
+        <Button Grid.Row="4" Grid.Column="2" x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click" />
+
+    </Grid>
+</Page>

@@ -1,0 +1,82 @@
+﻿<!--
+///<summary>
+/// Creator: Akoi Kollie
+/// Created: 2025-04-16
+/// Summary: View for Invoice. It handle Edit invoices of each invoice.
+/// Last updated by: Syler Bushlack
+/// Last updated: 2025/05/01
+/// Changes: added the projectID peramiter to the index actionlink
+/// Last updated by: Skyann Heintz
+/// Last updated: 2025/05/01
+/// Changes: Added styling 
+-->
+
+@model DataDomain.Invoice
+
+@{
+    ViewData["Title"] = "Edit";
+    IEnumerable<string> status = ViewBag.Status;
+    int projectID = ViewBag.ProjectID;
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit Invoice Status</h2>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" hidden>
+                        <label asp-for="InvoiceID" class="control-label"></label>
+                        <input asp-for="InvoiceID" class="form-control" />
+                        <span asp-validation-for="InvoiceID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="InvoiceNumber" class="control-label"></label>
+                        <input asp-for="InvoiceNumber" class="form-control" />
+                        <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="ExpenseID" class="control-label"></label>
+                        <input asp-for="ExpenseID" class="form-control" />
+                        <span asp-validation-for="ExpenseID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="ProjectID" class="control-label"></label>
+                        <input asp-for="ProjectID" class="form-control" />
+                        <span asp-validation-for="ProjectID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="InvoiceDate" class="control-label"></label>
+                        <input asp-for="InvoiceDate" class="form-control" />
+                        <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        @* <input asp-for="Status" class="form-control" /> *@
+                        @Html.DropDownListFor(m => m.Status,
+                                 new SelectList(status),
+                                 "Set Invoice Status",
+                                 new { @class = "form-control" })
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a href="@Url.Action("Index", new { projectId = projectID })" class="btn btn-secondary">Back to Invoices</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,101 @@
+﻿<!--
+    <Summary>
+    Creator: Skyann Heintz
+    Created: 2025/02/23
+    Summary: XAML page for the View AvailabilityDeskTop screen. 
+    This page allows users to view their availability. They can 
+    also use the buttons to go to the feature add availability or
+    update their current avilability. The String format for the 
+    for the date and time sets the way the date and time are
+    to look in the data grid. The string format is also used
+    for the Available All Day and Repeats Weekly to set it 
+    show true or false. Both ID's are set at auto, so they
+    will adjust the width they need based on the data
+    in their column. Everything else will take up the 
+    remaining space. When the user doesn't have any 
+    avalability in the list it will show a text box
+    message instead of the data grid list.
+    Last Updated By: Stan Anderson
+    Last Updated: 2025-04-08
+    What Was Changed: UI updates
+    </Summary>
+-->
+<Page x:Class="WpfPresentation.Pages.ViewAvailabilityDeskTop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewAvailabilityDeskTop"
+     >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
+            <Label x:Name="lblAvailability" Content="Availability" Style="{StaticResource TitleLabel}"/>
+        </Grid>
+        <DataGrid Name="AvailabilityDataGrid" Grid.Column="1" Grid.Row="1" AutoGenerateColumns="False"> 
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Availability ID" 
+                                    Binding="{Binding AvailabilityID}" 
+                                    Width="Auto"/>
+
+                <DataGridTextColumn Header="User ID" 
+                                    Binding="{Binding UserID}" 
+                                    Width="Auto"/>
+
+                <DataGridTextColumn Header="Available All Day" 
+                                    Binding="{Binding IsAvailable, StringFormat={}{0:Yes;No}}" 
+                                    Width="*"/>
+
+
+                <DataGridTextColumn Header="Repeats Weekly" 
+                                    Binding="{Binding RepeatWeekly, StringFormat={}{0:Yes;No}}" 
+                                    Width="*"/>
+
+                <DataGridTextColumn Header="Start Date and Time" 
+                                    Binding="{Binding StartDate, StringFormat='yyyy-MM-dd hh:mm:ss tt '}" 
+                                    Width="*"/>
+
+                <DataGridTextColumn Header="End Date and Time" 
+                                    Binding="{Binding EndDate, StringFormat='yyyy-MM-dd hh:mm:ss tt'}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock x:Name="tbNoAvailability" Grid.Row="1" Grid.Column="1"
+            Text="No availability at this time. Please add availability." 
+            Foreground="Red" 
+            FontSize="16" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Visibility="Collapsed"/>    
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnAdd" Content="Add Availability" Style="{StaticResource CallToAction}" Click="AddAvailability_Click"/>
+                <Button x:Name="BtnUpdate" Content="Update Availability" Grid.Column="1" Style="{StaticResource WarningButton}" Click="UpdateAvailability_Click"/>
+                <Button x:Name="btnBack" Content="Back" Grid.Column="1" Style="{StaticResource BackButton}" Click="btnBack_Click" Margin="10,57,10,-37"/>
+                <Button x:Name="BtnDelete" Content="Delete Availability" Grid.Column="2" Style="{StaticResource DangerButton}" Click="BtnDelete_Click" Margin="9,10,10,10"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,57 @@
+﻿<!--
+    <Summary>
+    Creator: Eric Idle
+    Created: 2025/04/10
+    Summary: Xaml page for user to view all finances for a project.
+    
+    Last Updated By: Chase Hannen
+    Last Updated:    2025/05/01
+    Summary:         Widening column span
+    </Summary>
+-->
+<Page x:Class="WpfPresentation.Pages.ViewProjectFunds"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewProjectFunds" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="lblFundAmount" Grid.Row="0" Grid.Column="2" Content="Amount" Style="{StaticResource LabelTop}"/>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <TextBox x:Name="txtFundAmount" FontSize="16" IsReadOnly="True"/>
+        </Grid>
+        <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Content="View Funds By Project" Style="{StaticResource TitleLabel}"/>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnViewDonation" Content="Donations" Style="{StaticResource CallToActionSecondary}" Click="btnViewDonation_Click" />
+            <Button Grid.Column="1" x:Name="btnViewExpense" Content="Expenses" Style="{StaticResource CallToActionSecondary}" Click="btnViewExpense_Click" />
+            <Button Grid.Column="2" x:Name="btnViewInvoice" Content="Invoices" Style="{StaticResource CallToActionSecondary}" Click="btnViewInvoice_Click" />
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Button Grid.Column="2" x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click" />
+        </Grid>
+    </Grid>
+</Page>

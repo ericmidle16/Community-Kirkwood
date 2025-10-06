@@ -1,0 +1,91 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Jennifer Nicewanner
+    /// Created: 2025-04-22
+    /// Summary: View to edit a user's status
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Title was updated from h4 to h2
+-->
+
+@model DataDomain.User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit User Status</h2>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="UserID" />
+                    <div class="form-group">
+                        <label asp-for="GivenName" class="control-label"></label>
+                        <input asp-for="GivenName" class="form-control" />
+                        <span asp-validation-for="GivenName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FamilyName" class="control-label"></label>
+                        <input asp-for="FamilyName" class="form-control" />
+                        <span asp-validation-for="FamilyName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReactivationDate" class="control-label"></label>
+                        <input asp-for="ReactivationDate" class="form-control" />
+                        <span asp-validation-for="ReactivationDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Suspended" /> @Html.DisplayNameFor(model => model.Suspended)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="ReadOnly" /> @Html.DisplayNameFor(model => model.ReadOnly)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RestrictionDetails" class="control-label"></label>
+                        <input asp-for="RestrictionDetails" class="form-control" />
+                        <span asp-validation-for="RestrictionDetails" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="Index" class="btn btn-secondary">Back to Users</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

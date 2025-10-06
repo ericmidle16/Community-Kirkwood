@@ -1,0 +1,56 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Stan Anderson
+    /// Created:  2025/02/24
+    /// Summary:  This is the page with the list of external contacts.
+    /// FrameLoad here.
+    /// Last Updated By: 
+    /// Last Updated: 
+    /// What was Changed: 
+    /// </summary>
+-->
+    
+    <Page x:Class="WpfPresentation.Pages.ViewAllExternalContacts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewAllExternalContacts"
+          Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Grid.Column="1" x:Name="lblExternalContacts" Style="{StaticResource TitleLabel}">External Contacts</Label>
+        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="gridExternalContacts" Loaded="gridExternalContacts_Loaded"></DataGrid>
+        
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" x:Name="btnViewDetailsExternalContact" Content="View Details" Click="btnViewDetailsExternalContact_Click" Style="{StaticResource CallToActionSecondary}"/>
+            <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddExternalContact" Content="Add New Contact" Click="btnAddExternalContact_Click" Style="{StaticResource CallToAction}"/>
+            <Button Grid.Row="0" Grid.Column="2" x:Name="btnBack" Content="Back" Click="btnBack_Click" Style="{StaticResource BackButton}"/>
+        </Grid>
+
+
+    </Grid>
+</Page>

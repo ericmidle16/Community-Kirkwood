@@ -1,0 +1,121 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-03-27
+    /// Summary:  This is the View for a list of Background Check records
+    ///     associated with a specific project.
+    /// Last Updated By: Skyann Heintz
+    /// Last Updated: 2025-04-30
+    /// What Was Changed: Styling has been added to the page. 
+    ///         
+    /// Last updated by: Dat Tran
+    /// Last updated: 2025-05-01
+    /// What was changed: Surrounded the Razor view with an if else block to load if background checks are available.
+    /// Otherwise display a Sweet Alert that says no background checks exist, with a button on the alert that goes back to the Project Details.
+    /// </summary>
+-->
+@model IEnumerable<DataDomain.BackgroundCheckVM>
+
+@{
+    ViewData["Title"] = "Index";
+
+    bool hasChecks = Model.Any();
+    var m = hasChecks ? Model.First() : null;
+}
+
+@if (TempData["AddSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertAddCheckShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["AddSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertAddCheckShown', 'true');
+            }
+        });
+    </script>
+    TempData.Remove("AddSuccess");
+}
+else
+{
+    <script>
+        sessionStorage.removeItem('sweetAlertAddCheckShown');
+    </script>
+}
+
+@if (TempData["EditSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertEditCheckShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["EditSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertEditCheckShown', 'true');
+            }
+        });
+    </script>
+    TempData.Remove("EditSuccess");
+}
+else
+{
+    <script>
+        sessionStorage.removeItem('sweetAlertEditCheckShown');
+    </script>
+}
+
+@if (hasChecks)
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="header">@Html.DisplayNameFor(model => model.InvestigatorName)</th>
+                <th class="header">@Html.DisplayNameFor(model => model.VolunteerName)</th>
+                <th class="header">@Html.DisplayNameFor(model => model.Status)</th>
+                <th class="header"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.InvestigatorName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VolunteerName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <a href="@Url.Action("Edit", new { id = item.BackgroundCheckID })" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="@Url.Action("Details", new { id = item.BackgroundCheckID, projectID = item.ProjectID })" class="btn btn-primary btn-sm">Details</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a href="@Url.Action("Details", "Project", new { id = m.ProjectID })" class="btn btn-secondary">Back to Project</a>
+    </div>
+}
+@if (!hasChecks)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Swal.fire({
+                icon: 'info',
+                title: 'No Background Checks',
+                text: 'There are no background checks for this project yet.',
+                confirmButtonText: 'Back to Project'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Details", "Project", new { id = ViewBag.ProjectID })';
+                }
+            });
+        });
+    </script>
+}

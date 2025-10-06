@@ -1,0 +1,68 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Brodie
+    /// Created: 2025-04-24
+    /// Summary: View for creating a notification
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Styling was added to the view
+-->
+@using WebPresentation.Models
+@model ScheduleNotificationsViewModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create New Notification</h2>
+                <form asp-action="Create" method="post">
+                    <input type="hidden" asp-for="Year" />
+                    <input type="hidden" asp-for="Month" />
+                    <div class="form-group">
+                        <label asp-for="NewTitle">Title</label>
+                        <input asp-for="NewTitle" class="form-control" maxlength="50" />
+                        <span asp-validation-for="NewTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewContent">Content</label>
+                        <textarea asp-for="NewContent" class="form-control" rows="4" maxlength="500"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label asp-for="NewStartDate">Start Date</label>
+                            <input asp-for="NewStartDate" class="form-control" type="date" />
+                        </div>
+                        <div class="col">
+                            <label asp-for="NewEndDate">End Date</label>
+                            <input asp-for="NewEndDate" class="form-control" type="date" />
+                        </div>
+                    </div>
+                    <div class="form-group form-check mt-2">
+                        <input asp-for="NewImportant" class="form-check-input" type="checkbox" id="cbImportant" />
+                        <label class="form-check-label" for="cbImportant">Mark Important</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Recipients</label>
+                        <select asp-for="NewRecipients" asp-items="@(new MultiSelectList(Model.Users, "UserID", "GivenName"))" multiple class="form-control">
+                        </select>
+                        <span asp-validation-for="NewRecipients" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="btn btn-success">Send</button>
+                        <a asp-action="Schedule" class="btn btn-danger">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

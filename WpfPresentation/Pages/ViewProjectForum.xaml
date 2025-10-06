@@ -1,0 +1,92 @@
+﻿<!--
+    <summary>
+        Creator:  Jackson Manternach
+        Created: 2025/03/13
+        Summary: This is the Project Forum View.
+    
+        Updated By: Skyann Heintz
+        Updated: 2025-04-03
+        What Was Changed: Added a click event to Start a new Thread button to show thread input once clicked. Added Label for Thread Name,
+        textbox for thread name, textbox for content, enter button. Also added in the comment to this page. Page was adjusted to width 700.
+    
+        Last Updated By: Kate Rich
+        Last Updated: 2025-04-18
+        What Was Changed:
+            Replace the ScrollViewer, StackPanel, & Grid containing TextBlocks with a DataGrid, so that we can select an item & pull
+            the associated ID (&/or other data) for button funtionalities.
+            Reformatted the entire page to be more intuitive & user-friendly.
+    
+        Last Updated By: Syler Bushlack
+        Last Updated: 2025-04-23
+        What Was Changed:
+            Removed the pin button, added name for the Start New Thread Button
+    
+     Last Updated By: Stan Anderson
+         Last Updated: 2025-04-26
+         What Was Changed:
+            Updated styling
+    
+    Last Updated By: Syler Bushlack
+    Last Updated: 2025-04-30
+    What Was Changed:
+        Added an onLoad event to the page
+    </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.ViewProjectForum"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewProjectForum" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" x:Name="txtForumTitle" Content="Welcome to the &lt;project name&gt; Forum!" Style="{StaticResource TitleLabel}"/>
+        <Button Grid.Row="1" x:Name="btnStartNewThread" Content="Start a new Thread" Style="{StaticResource CallToAction}" Click="btnStartNewThread_Click"/>
+
+        <DataGrid Grid.Row="2" x:Name="grdThreads" IsReadOnly="True" AutoGenerateColumns="False"
+                  HeadersVisibility="Column" Loaded="grdThreads_Loaded">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Thread Name" Binding="{Binding ThreadName}" Width="*"/>
+                <DataGridTextColumn Header="Posted By" Binding="{Binding UserName}" Width="*"/>
+                <DataGridTextColumn Header="Date Posted" Binding="{Binding FormattedDatePosted}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="btnView" Content="View" Click="btnView_Click" Style="{StaticResource CallToActionSecondary}"/>
+            <!-- <Button Grid.Column="1" x:Name="btnEdit" Content="Edit" Style="{StaticResource WarningButton}"/> -->
+            <!-- <Button Grid.Column="2" x:Name="btnDelete" Content="Delete" Style="{StaticResource DangerButton}"/> -->
+            <Button Grid.Column="3" x:Name="btnMute" Content="Mute Volunteers" Click="btnMute_Click" Style="{StaticResource CallToActionSecondary}"/>
+            <Button x:Name="btnBack" Grid.Column="4" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+        </Grid>
+
+
+        <!-- Sky's Adding Thread -->
+        <Label Grid.Row="4" x:Name="lbThreadName" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Visibility="Collapsed">Thread Name:</Label>
+        <TextBox Grid.Row="4" x:Name="tbThreadName" VerticalAlignment="Bottom" Margin="10 0 60 0"
+            KeyDown="tbContent_KeyDown" Visibility="Collapsed"/>
+        <TextBox Grid.Row="5" x:Name="tbContent" VerticalAlignment="Stretch" Margin="10 10 60 10" KeyDown="tbContent_KeyDown" Visibility="Collapsed"/>
+        <Button Grid.Row="5" x:Name="EnterButton" Content="Enter" Margin="645 10 10 10" Click="EnterButton_Click" Visibility="Collapsed" Style="{StaticResource CallToAction}"/>
+    </Grid>
+</Page>

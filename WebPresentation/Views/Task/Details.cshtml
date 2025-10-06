@@ -1,0 +1,71 @@
+﻿<!--
+///<summary>
+/// Creator: Josh Nicholson
+/// Created: 2025-04-24
+/// Summary: The view to see details about a single task
+
+/// Last Updated By: Skyann
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added.
+/// Updated By: Skyann Heintz
+/// Updated: 2025-04-30
+/// What Was Changed: Title was updated from h4 to h2
+/// </summary>
+-->
+
+@model DataDomain.Task
+
+@{
+    ViewData["Title"] = "Details";
+
+    DataDomain.Event currentEvent = ViewBag.Event;
+}
+
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h2 class="m-0"> Task Details</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.TaskDate)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.TaskDate)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.TaskType)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.TaskType)
+                </dd>
+                @* Assumed to be Active *@
+                @* <dt class = "col-sm-2"> *@
+                @*     @Html.DisplayNameFor(model => model.Active) *@
+                @* </dt> *@
+                @* <dd class = "col-sm-10"> *@
+                @*     @Html.DisplayFor(model => model.Active) *@
+                @* </dd> *@
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <a href="@Url.Action("Edit", new { id = Model.TaskID })" class="btn btn-warning">Edit</a>
+    <a class="btn btn-secondary" asp-area="" asp-controller="Task" asp-action="ViewEventTasks" asp-route-eventID=@currentEvent.EventID asp-route-eventName=@currentEvent.Name asp-route-projectID=@currentEvent.ProjectID>Back to Tasks</a>
+</div>
+

@@ -1,0 +1,266 @@
+﻿<Page x:Class="WpfPresentation.Pages.ScheduleNotificationCalendarDesktop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewNotificationCalendarDesktop"
+      >
+    <Page.Resources>
+        <!-- template for showing each notification in the list -->
+        <DataTemplate x:Key="NotificationItemTemplate">
+            <Border BorderBrush="Gray" BorderThickness="1" Padding="6" Margin="0,4">
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Date}" FontStyle="Italic" FontSize="10"/>
+                    <TextBlock Text=" Important ${Binding Important}" FontStyle="Oblique" FontSize="10"/>
+                    <TextBlock Text="{Binding StartDate}" FontStyle="Italic" FontSize="8"/>
+                    <TextBlock Text="{Binding EndDate}" FontStyle="Italic" FontSize="8"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <!--       1) Calendar + List View        -->
+        <Grid x:Name="CalendarView" Margin="10"  Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.25*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header: Prev / Month / Next -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="btnPrev" Content="&lt;" Width="30" Click="btnPrev_Click" Style="{StaticResource CallToActionSecondary}"/>
+                <Label x:Name="lblMonthYear"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Margin="8,0"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       MinWidth="150"
+                       Content="{Binding DisplayMonthYear}"/>
+                <Button x:Name="btnNext" Content="&gt;" Width="30" Click="btnNext_Click" Style="{StaticResource CallToActionSecondary}"/>
+            </StackPanel>
+
+            <!-- Calendar Grid -->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="28*"/>
+                    <ColumnDefinition Width="263*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Weekday Labels -->
+                <UniformGrid Grid.Row="0" Columns="7" Grid.ColumnSpan="2" Margin="0,0,0,374" Grid.RowSpan="2">
+                    <TextBlock Text="Sun" HorizontalAlignment="Center" />
+                    <TextBlock Text="Mon" HorizontalAlignment="Center" />
+                    <TextBlock Text="Tue" HorizontalAlignment="Center" />
+                    <TextBlock Text="Wed" HorizontalAlignment="Center" />
+                    <TextBlock Text="Thu" HorizontalAlignment="Center" />
+                    <TextBlock Text="Fri" HorizontalAlignment="Center" />
+                    <TextBlock Text="Sat" HorizontalAlignment="Center" />
+                </UniformGrid>
+
+                <!-- Day Cells -->
+                <ItemsControl x:Name="CalendarDays"
+                              Grid.Row="1"
+                              ItemsSource="{Binding Calendar}"
+                              Margin="0,20,0,0" Grid.ColumnSpan="2">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="7" Rows="6"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" CornerRadius="4" Padding="4" Margin="2">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="White"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsCurrentMonth}" Value="False">
+                                                <Setter Property="Background" Value="#EEE"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+
+                                <StackPanel MouseLeftButtonUp="Day_Click">
+                                    <!-- Day number -->
+                                    <TextBlock Text="{Binding Date.Day}" HorizontalAlignment="Right">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontWeight" Value="Normal"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsToday}" Value="True">
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <!-- Notification count badge -->
+                                    <Border Background="Red"
+                                            CornerRadius="4"
+                                            Padding="4,0"
+                                            HorizontalAlignment="Left">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Notifications.Count}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding Notifications.Count}"
+                                                   Foreground="White"
+                                                   FontSize="14"/>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+            <!-- Detail Column: Selected Date + New Button + ListBox -->
+            <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="10,0,0,0">
+                <TextBlock x:Name="tbkDetailTitle"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Margin="0,0,0,8"
+                           Text="{Binding SelectedDate, StringFormat='Notifications for {0:MMMM d, yyyy}'}"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <Button x:Name="btnNew" Content="New" Width="60" Click="btnNew_Click" Style="{StaticResource CallToAction}"/>
+                </StackPanel>
+
+                <ListBox x:Name="lstNotifications"
+                         ItemTemplate="{StaticResource NotificationItemTemplate}"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         MaxHeight="400"/>
+            </StackPanel>
+        </Grid>
+
+        <!--          2) Full-Screen "New Notification" Form       -->
+        <StackPanel x:Name="NewNotificationPanel" Margin="40, 0, 40, 0" Visibility="Collapsed">
+
+            <!-- semi-transparent overlay background -->
+
+            <TextBlock Text="Create New Notification"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,1"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <Label Content="Title"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       Style="{StaticResource LabelTop}"/>
+
+                <TextBox x:Name="tbxNewName"
+                           FontSize="18"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           MaxLength="50"
+                           Style="{StaticResource TextBottom}"/>
+
+
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Content"
+                       Grid.Row="0"
+                       Style="{StaticResource LabelTop}"/>
+
+                <TextBox x:Name="tbxNewContent"
+                         Grid.Row="1"
+                         AcceptsReturn="True"
+                         MinHeight="75"
+                         MaxLength="500"
+                         Style="{StaticResource Description}"/>
+            </Grid>
+            <UniformGrid Columns="2">
+                <StackPanel>
+                    <Label Content="Start Date:" Style="{StaticResource LabelTop}" Margin="10, 0, 0, -10"/>
+                    <DatePicker x:Name="dpStartDate" Style="{StaticResource DatePicker}"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="End Date:" Style="{StaticResource LabelTop}" Margin="10, 0, 0, -10"/>
+                    <DatePicker x:Name="dpEndDate" Style="{StaticResource DatePicker}"/>
+                </StackPanel>
+            </UniformGrid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="Select Recipients:" 
+                       Grid.Row="0"
+                       Style="{StaticResource LabelTop}"/>
+                <ListBox
+                        x:Name="lstRecipients"
+                        ItemsSource="{Binding Users}"
+                        SelectionMode="Extended"
+                        Height="90"
+                        Grid.Row="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="GivenName"/>
+                                        <Binding Path="FamilyName"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <CheckBox x:Name="cbxImportant"
+                                  Content="Mark Important"
+                                  Margin="0,0,0,12"/>
+                <Button x:Name="btnSend"
+                                Content="Send"
+                                Width="80"
+                                Click="Send_Click"/>
+                <Button x:Name="btnCancelFull"
+                                Content="Cancel"
+                                Width="80"
+                                Click="BtnCancel_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

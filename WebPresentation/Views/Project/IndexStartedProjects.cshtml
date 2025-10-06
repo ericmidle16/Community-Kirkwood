@@ -1,0 +1,94 @@
+﻿<!--
+///<summary>
+/// Creator: Syler Bushlack 
+/// Created: 2025/04/010 
+/// Summary: The index view for seeing all created projects 
+
+/// Last Updated By: Skyann
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added.
+/// </summary>
+-->
+@model IEnumerable<DataDomain.ProjectVM>
+
+@{
+    ViewData["Title"] = "IndexStartedProjects";
+}
+
+<h1 class="text-center">My Projects</h1>
+
+
+<p>
+    <a asp-action="Create" class="btn btn-success btn">Create New Project</a>
+    <a asp-action="Index" class="btn btn-info btn">All Projects</a>
+</p>
+@using(Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="header">
+                @Html.ActionLink("Project Starter", "IndexStartedProjects", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th class="header">
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Name), "IndexStartedProjects", new { sortOrder = ViewBag.ProjectNameParm })
+            </th>
+            <th class="header">
+                @Html.ActionLink("Project Type", "IndexStartedProjects", new { sortOrder = ViewBag.ProjectType })
+            </th>
+            <th class="header">
+                @Html.ActionLink("Location", "IndexStartedProjects", new { sortOrder = ViewBag.Location })
+            </th>
+            <th class="header">
+                @Html.ActionLink("Start Date", "IndexStartedProjects", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+            <th class="header">
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Status), "IndexStartedProjects", new { sortOrder = ViewBag.Status })
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectTypeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <a href="@Url.Action("Edit", new { id = item.ProjectID })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Details", new { id = item.ProjectID })" class="btn btn-primary btn-sm">Details</a>
+                        <a href="@Url.Action("Index", "VolunteerStatus", new { id = item.ProjectID })" class="btn btn-info btn-sm">Volunteer Requests</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

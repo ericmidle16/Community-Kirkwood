@@ -1,0 +1,58 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Stan Anderson
+    /// Created:  2025/02/10
+    /// Summary:  This is the page for assigning a task.
+    /// FrameLoad here.
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025/04/07
+    /// What was Changed: Redesigned the page.
+    /// </summary>
+-->
+    <Page x:Class="WpfPresentation.Pages.TaskAssignment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="TaskAssignment">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label x:Name="lblTaskAssignment" Style="{StaticResource TitleLabel}">Task Assignment</Label>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label x:Name="lblTaskAssignmentByEventIDList" Style="{StaticResource LabelTop}">Tasks</Label>
+        </Grid>
+
+
+
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <DataGrid x:Name="gridTasksForTaskAssignment" IsReadOnly="True" SelectionMode="Single" Loaded="gridTasksForTaskAssignment_Loaded"></DataGrid>
+            
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Button x:Name="btnCancelTaskAssignment" Content="Cancel" Click="btnCancelTaskAssignment_Click" Style="{StaticResource WarningButton}"></Button>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Button x:Name="btnSubmitTaskAssignment" Content="Assign Task" Click="btnSubmitTaskAssignment_Click" Style="{StaticResource CallToAction}"></Button>
+        </Grid>
+    </Grid>
+        
+</Page>

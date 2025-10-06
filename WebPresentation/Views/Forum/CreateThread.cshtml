@@ -1,0 +1,76 @@
+﻿@*<summary> *@
+@* Creator: Skyann Heintz  *@
+@* Created: 2025-04-18  *@
+@* Summary: Create Thread Page *@
+@* *@
+@* Last Updated By: Syler Bushlack*@
+@* Last Updated: 2025-04-24*@
+@* What Was Changed: *@
+@*      Changed Back to List to pass the projectID to the ViewProjectForum *@
+@* Last Updated By: Skyann Heintz*@
+@* Last Updated: 2025-04-28*@
+@* What Was Changed: *@
+@*      Updated styling.
+@* </summary> *@
+@model DataDomain.Thread
+
+@{
+    ViewData["Title"] = "CreateThread";
+    int projectID = ViewBag.ProjectID;
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create Thread</h2>
+
+                <form asp-action="CreateThread">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ThreadID" class="control-label" hidden></label>
+                        <input asp-for="ThreadID" class="form-control" hidden />
+                        <span asp-validation-for="ThreadID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProjectID" class="control-label" hidden></label>
+                        <input asp-for="ProjectID" class="form-control" hidden />
+                        <span asp-validation-for="ProjectID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserID" class="control-label" hidden></label>
+                        <input asp-for="UserID" class="form-control" hidden />
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThreadName" class="control-label">Thread Name</label>
+                        <input asp-for="ThreadName" class="form-control" />
+                        <span asp-validation-for="ThreadName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DatePosted" class="control-label" hidden></label>
+                        <input asp-for="DatePosted" class="form-control" hidden />
+                        <span asp-validation-for="DatePosted" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content" class="control-label"></label>
+                        <input asp-for="Content" class="form-control" />
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="ViewProjectForum" asp-route-id="@projectID" class="btn btn-secondary ml-3">Back to Project Forum</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div> *@
+@*     @* <a asp-action="ViewProjectForum" asp-route-id="projectID">Back to List</a> *@ 
+@*     @Html.ActionLink("Back to List", "ViewProjectForum", new { id = projectID }) *@
+@* </div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

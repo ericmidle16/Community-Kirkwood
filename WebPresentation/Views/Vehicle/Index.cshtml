@@ -1,0 +1,296 @@
+﻿@*  <summary> *@
+@*      Ellie Wacker *@
+@*      Created: 2025-03-27 *@
+
+@*     View for viewing all vehicles
+       Last Upaded By:Skyann Heintz *@
+@*     Last Updated: 2025-04-04 *@
+@*     What Was Changed: Added styling to the document. Moved Add Insurance button to the top of the table on the left side.
+           Commented out the old Add Insurance button. Updated the h1 class to say "Your Vehciles" from Index. Adjusted 
+           "Activate Vehcile" to Activate
+
+       Last Upaded By: Ellie Wacker *@
+@*     Last Updated: 2025-04-04 *@
+@*     What Was Changed: I changed the add insurance button to add license and turned activate vehicle into a link to add insurance
+        
+       Last Upaded By: Skyann Heintz *@
+@*     Last Updated: 2025-04-28 *@
+@*     What Was Changed: Added styling to buttons
+
+       Last Updated By: Dat Tran
+       Last Updated: 2025-04-27
+       What was changed: Changed the alert of deactivating a vehicle to a Sweet Alert.
+
+       Last Upaded By: Skyann Heintz *@
+@*     Last Updated: 2025-04-30 *@
+@*     What Was Changed: Updated "Add Your Vechile" to "Create New Vehicle"
+
+
+@* </summary> *@
+
+@model IEnumerable<DataDomain.Vehicle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@* @if (TempData["SuccessMessage"] != null) *@
+@* { *@
+@*     <div class="alert alert-success"> *@
+@*         @TempData["SuccessMessage"] *@
+@*     </div> *@
+@* } *@
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertUpdateVehicleShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["SuccessMessage"]'
+                });
+                sessionStorage.setItem('sweetAlertUpdateVehicleShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("SuccessMessage");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertUpdateVehicleShown');
+    </script>
+}
+@if (TempData["AddLicenseSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertAddLicenseShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["AddLicenseSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertAddLicenseShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("AddLicenseSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddLicenseShown');
+    </script>
+}
+@if (TempData["AddSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertAddVehicleShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["AddSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertAddVehicleShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("AddSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddVehicleShown');
+    </script>
+}
+@if (TempData["DeleteSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertDeactivateVehicleShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["DeleteSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertDeactivateVehicleShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("DeleteSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertDeactivateVehicleShown');
+    </script>
+}
+@if (TempData["AddInsuranceSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertAddInsuranceShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["AddInsuranceSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertAddInsuranceShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("AddInsuranceSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddInsuranceShown');
+    </script>
+}
+<h1 class="text-center">Your Vehicles</h1>
+
+<p>
+    <a asp-action="Create" asp-route-id="@ViewBag.UserID" class="btn btn-success">Create New Vehicle</a>
+    <a asp-action="AddLicense" asp-route-userID="@ViewBag.UserID" class="btn btn-success float-end">Add Your License</a>
+
+</p>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info text-center"><strong>@ViewBag.Message</strong></div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="header">Vin Number</th>
+                    <th class="header">
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
+                    <th class="header">
+                        @Html.DisplayNameFor(model => model.Color)
+                    </th>
+                    <th class="header">
+                        @Html.DisplayNameFor(model => model.Year)
+                    </th>
+                    <th class="header">
+                        License Plate Number
+                    </th>
+                    <th class="header">
+                        Insurance Status
+                    </th>
+                    <th class="header">
+                        @Html.DisplayNameFor(model => model.Make)
+                    </th>
+                    <th class="header">
+                        @Html.DisplayNameFor(model => model.Model)
+                    </th>
+                    <th class="header">
+                        Number Of Seats
+                    </th>
+                    <th class="header">
+                        Can Transport
+                    </th>
+                    <th class="header"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VehicleID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            <p class="text-capitalize">@Html.DisplayFor(modelItem => item.Color)</p>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Year)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LicensePlateNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InsuranceStatus)
+                        </td>
+                        <td>
+                            <p class="text-capitalize">@Html.DisplayFor(modelItem => item.Make)</p>
+                        </td>
+                        <td>
+                            <p class="text-capitalize">@Html.DisplayFor(modelItem => item.Model)</p>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransportUtility)
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.VehicleID, userID = ViewBag.UserID }, new { @class = "btn btn-warning btn-sm" })
+                                @if (item.Active == false)
+                                {
+                                    <div class="d-flex justify-content-center gap-2">
+                                        @Html.ActionLink("Activate", "AddInsurance", new { vehicleID = item.VehicleID, userID = ViewBag.UserID }, new { @class = "btn btn-success btn-sm" })
+                                    </div>
+                                }
+                                @* This makes a pop up confirm box *@
+                                @if (item.Active == true)
+                                {
+                                    <a href="@Url.Action("Deactivate", new { id = item.VehicleID, userID = item.UserID })"
+                                       class="btn btn-danger btn-sm" id="deleteButton">
+                                        Deactivate
+                                    </a>
+                                    <script>
+                                        document.getElementById("deleteButton").addEventListener("click", function (e) {
+                                            e.preventDefault(); // @*This prevents the link from immediately navigating away*@ 
+
+                                                    Swal.fire({
+                                                title: 'Are you sure?',
+                                                text: "You won't be able to revert this!",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#d33',
+                                                cancelButtonColor: '#3085d6',
+                                                confirmButtonText: 'Yes, deactivate it.'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                        @*Manually redirect the user to the Deactivate URL if confirmed*@
+                                                    window.location.href = this.href;
+                                                }
+                                        @*If they cancel, nothing happens. Stay on the page.*@
+                                            });
+                                        });
+                                    </script>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+
+        @* <a href="@Url.Action("UserProfile", "User", new { email = ViewBag.Email })"class="btn btn-secondary">Back to Profile</a> *@
+
+    </div>
+
+}

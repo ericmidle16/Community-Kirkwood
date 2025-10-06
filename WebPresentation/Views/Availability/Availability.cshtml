@@ -1,0 +1,125 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Skyann Heintz
+    /// Created: 2025/03/23
+    /// Summary: View for Availability. Displays a list of the signed-in user's
+    /// available days and times. Allows the user to update existing availability
+    /// and create new entries. If no availability exists, a ViewBag message is 
+    /// shown instead prompting the user to add some.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-04
+    /// What Was Changed: Added styling and removed unused commented-out code.
+    ///
+    /// Updated By: Dat Tran
+    /// Updated: 2025-04-27
+    /// What Was Changed: Integrated Sweet Alert JavaScript with TempData 
+    ///         from AvailabilityController.
+    /// </summary>
+-->
+
+@model IEnumerable<DataDomain.Availability>
+
+@{
+    ViewData["Title"] = "Availability";
+}
+
+<h1 class="text-center"> Your Availability</h1>
+@if (TempData["UpdateSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertUpdateAvailabilityShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["UpdateSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertUpdateAvailabilityShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("UpdateSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertUpdateAvailabilityShown');
+    </script>
+}
+@if (TempData["AddSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertAddAvailabilityShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["AddSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertAddAvailabilityShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("AddMessage");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddAvailabilityShown');
+    </script>
+}
+
+<p>
+    <a asp-action="AddAvailability" class="btn btn-success btn-sm">Create New Availability</a>
+</p>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
+else
+{
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="header">Available all Day</th>
+                <th class="header">Repeats Weekly </th>
+                <th class="header">Start Date & Time </th>
+                <th class="header"> End Date & Time</th>
+                <th class="header"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>     
+                    <td>
+                        @(item.IsAvailable ? "True" : "False")
+                    </td>
+                    <td>
+                        @(item.RepeatWeekly ? "True" : "False")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <a href="@Url.Action("Update", new { availabilityID = item.AvailabilityID })" class="btn btn-warning btn-sm">Edit</a>
+                            @* @Html.ActionLink("Update", "Update", new { /* id=item.PrimaryKey */ }) *@
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

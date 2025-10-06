@@ -1,0 +1,99 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Dat Tran
+    /// Created: 2025-04-02
+    /// Summary: View to update a item
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page.
+-->
+
+@model DataDomain.NeedList
+
+@{
+    ViewData["Title"] = "Update";
+    
+    
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit Item</h2>
+                <form asp-action="Update">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" hidden>
+                        <label asp-for="ItemID" class="control-label"></label>
+                        <input asp-for="ItemID" class="form-control" />
+                        <span asp-validation-for="ItemID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="ProjectID" class="control-label"></label>
+                        <input asp-for="ProjectID" class="form-control" hidden />
+                        <span asp-validation-for="ProjectID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity" class="control-label"></label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check" hidden>
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsObtained" /> @Html.DisplayNameFor(model => model.IsObtained)
+                        </label>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="NeedList" asp-route-projectID="@ViewBag.ProjectID" class="btn btn-secondary">Back to NeedList</a>
+                        <button type="button" id="deleteButton" class="btn btn-danger">Delete</button>
+                        <script>
+                            document.getElementById("deleteButton").addEventListener("click", function (e) {
+                                Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: "You won't be able to revert this!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Yes, delete it!'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        document.getElementById("deleteForm").submit();
+                                    }
+                                });
+                            });
+                        </script>
+
+                    </div>
+                </form>
+                <form id="deleteForm" asp-action="Delete" method="post" style="display:none;">
+                    <input type="hidden" name="ItemID" value="@Model.ItemID" />
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID" />
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

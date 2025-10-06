@@ -1,0 +1,53 @@
+﻿<Page x:Class="WpfPresentation.Pages.PgEventList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="PgEventList" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="lblEvents" Grid.Row="0" Grid.Column="1" Content="Events" Style="{StaticResource TitleLabel}"/>
+        <DataGrid x:Name="dgEventList" Grid.Row="1" Grid.Column="1" />
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnViewAnEvent" Grid.Row="0" Grid.Column="0" Content="View Event" Click="btnViewAnEvent_Click" Style="{StaticResource CallToActionSecondary}"></Button>
+            <Button x:Name="btnViewEventsTasks" Grid.Row="0" Grid.Column="1" Content="View Event Tasks" Click="btnViewEventsTasks_Click" Style="{StaticResource CallToActionSecondary}"></Button>
+            <Button x:Name="btnBack" Grid.Row="0" Grid.Column="2" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click" />
+            <Button x:Name="btnEditEvent" Grid.Row="1" Grid.Column="0" Content="Update Event" Style="{StaticResource WarningButton}" Click="btnEditEvent_Click"></Button>
+            <Button x:Name="btnCreateEvent" Grid.Row="1" Grid.Column="1" Content="Create Event" IsEnabled="True" Style="{StaticResource CallToAction}" Click="btnCreateEvent_Click"></Button>
+            <Button x:Name="btnDeleteEvent" Grid.Row="1" Grid.Column="2" Content="Delete Event" Click="btnDeleteEvent_Click" Style="{StaticResource DangerButton}"></Button>
+
+        </Grid>
+
+
+
+
+
+
+
+        
+    </Grid>
+</Page>

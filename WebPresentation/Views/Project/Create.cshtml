@@ -1,0 +1,132 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Josh Nicholson
+    /// Created: 2025-04-24
+    /// Summary: Created the create project view.
+    ///
+    /// Updated By: Skyann
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page. 
+    /// Updated By: Dat Tran
+    /// Updated: 2025-04-27
+    /// What Was Changed: Sweet Alert additions.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Title was updated from h4 to h2
+-->
+@model DataDomain.Project
+
+@{
+    ViewData["Title"] = "Create";
+
+    IEnumerable<string> projectTypes = ViewBag.ProjectTypes;
+    IEnumerable<string> projectStatus = ViewBag.ProjectStatus;
+    IEnumerable<string> locationName = ViewBag.Locations;
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertCreateProjectShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["SuccessMessage"]'
+                });
+                sessionStorage.setItem('sweetAlertCreateProjectShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("SuccessMessage");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertCreateProjectShown');
+    </script>
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create Project</h2>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ProjectTypeID" class="control-label">Project Type</label>
+                        @Html.DropDownListFor(m => m.ProjectTypeID, new SelectList(projectTypes), new { @class = "form-control" })
+                        <span asp-validation-for="ProjectTypeID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Location Name</label>
+                        <select name="SelectedLocationName" class="form-control">
+                            @foreach (var name in locationName)
+                            {
+                                <option value="@name">@name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Start Date</label>
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        @Html.DropDownListFor(m => m.Status, new SelectList(projectStatus), new { @class = "form-control" })
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="AvailableFunds" class="control-label">Available Funds</label>
+                        <input asp-for="AvailableFunds" class="form-control" type="number" value="0" />
+                        <span asp-validation-for="AvailableFunds" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PayPalAccount" class="control-label">Paypal Account</label>
+                        <input asp-for="PayPalAccount" class="form-control" type="email" value="" />
+                        <span asp-validation-for="PayPalAccount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="AcceptsDonations" id="acceptsDonationsCheckbox" />
+                            Accepts Donations
+                        </label>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-secondary ml-3">Back to Projects</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

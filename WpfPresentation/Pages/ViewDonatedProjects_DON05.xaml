@@ -1,0 +1,57 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-03-02
+    /// Summary:  This is the Page for viewing a list of projects a Donor has
+    ///     made monetary donations to. It displays a summary of how much they've
+    ///     donated in total to each project.
+    /// </summary>
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025/04/08
+-->
+<Page x:Class="WpfPresentation.Pages.DON05_viewDonatedProjects"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="DON05_viewDonatedProjects">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" Content="Monetary Donation Summary" Style="{StaticResource TitleLabel}"/>
+
+        <!-- Data Grid for showing summarized donation information per project (that they've donated to) to the user. -->
+        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="grdDonationSummaries" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserReorderColumns="False" CanUserResizeRows="False" Loaded="grdDonationSummaries_Loaded">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="*"/>
+                <DataGridTextColumn Header="Project Location" Binding="{Binding ProjectLocation}" Width="*"/>
+                <DataGridTextColumn Header="Total Donations" Binding="{Binding MonetaryDonationTotal}"/>
+                <DataGridTextColumn Header="Most Recent Donation Date" Binding="{Binding FormattedLastDonationDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!-- Buttons -->
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="2" x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+        </Grid>
+    </Grid>
+</Page>

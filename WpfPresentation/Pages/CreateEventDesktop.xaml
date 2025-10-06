@@ -1,0 +1,112 @@
+﻿<!--  
+<summary>
+Creator:  Jackson Manternach
+Created:  ?
+Summary:  Xaml code to create an event
+Last updated by: Stan Anderson
+Last updated: 2025-04-26
+Changes: Updated UI
+</summary>
+-->
+<Page x:Class="WpfPresentation.Pages.CreateEventDesktop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="CreateEventDesktop"
+      Loaded="Page_Loaded">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Create an Event for Your Project" Style="{StaticResource TitleLabel}"/>
+
+
+
+
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Event Name:" Grid.Column="0" Style="{StaticResource LabelLeft}"/>
+                <TextBox x:Name="txtEventName" Grid.Column="1" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Start Date/Time" Grid.Row="0" Style="{StaticResource LabelTop}"/>
+                <DatePicker x:Name="dpEventStart" Grid.Column="0" Grid.Row="1" Style="{StaticResource DateUnder}"/>
+                <ComboBox x:Name="cboStartHour" Grid.Column="1" Grid.Row="1" Style="{StaticResource ComboUnder}"/>
+                <ComboBox x:Name="cboStartAMPM" Grid.Column="2" Grid.Row="1" Style="{StaticResource ComboUnder}"/>
+
+                <Label Content="End Date/Time" Grid.Row="2" Style="{StaticResource LabelTop}"/>
+                <DatePicker x:Name="dpEventEnd" Grid.Column="0" Grid.Row="3" Style="{StaticResource DateUnder}"/>
+                <ComboBox x:Name="cboEndHour" Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboUnder}"/>
+                <ComboBox x:Name="cboEndAMPM" Grid.Column="2" Grid.Row="3" Style="{StaticResource ComboUnder}"/>
+
+                <Label Content="Event Type" Grid.Row="4" Style="{StaticResource LabelTop}"/>
+                <ComboBox x:Name="cboBoxEventType" Grid.Row="5" Grid.ColumnSpan="3" Style="{StaticResource ComboUnder}"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Location" Grid.Row="0" Style="{StaticResource LabelTop}"/>
+                <ComboBox x:Name="cboBoxLocation" Grid.Row="1" Style="{StaticResource ComboUnder}"/>
+
+                <Label Content="Volunteers Needed" Grid.Row="2" Style="{StaticResource LabelTop}"/>
+                <TextBox x:Name="txtVolunteersNeeded" Grid.Row="3" Style="{StaticResource TextBottom}"/>
+
+                <Label Content="Notes" Grid.Row="4" Style="{StaticResource LabelTop}"/>
+                <TextBox x:Name="txtNotes" Grid.Row="5" Style="{StaticResource TextBottom}" AcceptsReturn="True"/>
+            </Grid>
+
+            <Label Content="Description" Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelTop}"/>
+            <TextBox x:Name="txtDescription" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" AcceptsReturn="True" Style="{StaticResource Description}"/>
+
+            <Button Grid.Row="5" Grid.Column="1" x:Name="btnSubmit" Content="Create Event" Click="btnSubmit_Click" Style="{StaticResource CallToAction}"/>
+            <Button Grid.Row="5" Grid.Column="2" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click" Style="{StaticResource WarningButton}"/>
+        </Grid>
+    </ScrollViewer>
+</Page>

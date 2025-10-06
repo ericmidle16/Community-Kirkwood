@@ -1,0 +1,110 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-02-02
+    /// Summary:  This is the Page for viewing an individual project's
+    ///     information.
+    ///
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025-04-07
+    /// What Was Changed: Added Need List button
+    /// </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.viewProjectDesktop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="viewProjectDesktop" Loaded="Page_Loaded">
+    <Grid> <!-- START Page Grid - Page for Viewing Project Data -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Display Project Name -->
+        <Label x:Name="lblProjectName" Content="Project Name" Style="{StaticResource TitleLabel}"/>
+
+        <Grid Grid.Row="1"> <!-- START Grid for Project Button Controls -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="btnMembers" Content="Members" Style="{StaticResource CallToActionSecondary}" Click="btnMembers_Click" />
+            <Button Grid.Column="1" x:Name="btnEvents" Content="Events"  Style="{StaticResource CallToActionSecondary}" Click="btnEvents_Click"/>
+            <Button Grid.Column="2" x:Name="btnBudget" Content="Budget"  Style="{StaticResource CallToActionSecondary}" Click="btnBudget_Click"/>
+            <Button Grid.Column="3" x:Name="btnNeedList" Content="Need List" Style="{StaticResource CallToActionSecondary}" Click="btnNeedList_Click"/>
+            <Button Grid.Column="4" x:Name="btnForum" Content="Forum" Style="{StaticResource CallToActionSecondary}" Click="btnForum_Click"/>
+
+            <Button Grid.Column="2" x:Name="btnTasks" Content="Tasks"  Style="{StaticResource CallToActionSecondary}" Click="btnTasks_Click" Visibility="Hidden"/>
+
+        </Grid> <!-- END Grid for Project Button Controls -->
+
+        <Grid Grid.Row="2"> <!-- START Grid for Displaying Project Information -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" x:Name="lblProjectStatus" Content="Project Status:" Style="{StaticResource LabelTop}"/>
+            <TextBox Grid.Column="0" Grid.Row="1" x:Name="txtProjectStatus" Text="Active" IsEnabled="False" Style="{StaticResource TextBottom}"/>
+
+                <Label Grid.Column="0" Grid.Row="2" x:Name="lblProjectStartDate" Content="Dates:" Style="{StaticResource LabelTop}"/>
+            <TextBox Grid.Column="0" Grid.Row="3" x:Name="txtProjectStartDate" Text="09/12/2024 - 12/06/2024" IsEnabled="False" Style="{StaticResource TextBottom}"/>
+
+                <Label Grid.Column="0" Grid.Row="4" x:Name="lblProjectType" Content="Project Type:" Style="{StaticResource LabelTop}"/>
+            <TextBox Grid.Column="0" Grid.Row="5" x:Name="txtProjectType" Text="Construction" IsEnabled="False" Style="{StaticResource TextBottom}"/>
+
+            <Label Grid.Row="6" Grid.Column="0" x:Name="lblProjectLocation" Content="Location:" Style="{StaticResource LabelTop}"/>
+            <TextBox Grid.Row="7" Grid.Column="0" x:Name="txtProjectLocationName" Text="Civic Center" IsEnabled="False" Style="{StaticResource TextBottom}"/>
+            <TextBox Grid.Row="8" Grid.Column="0" x:Name="txtProjectCityState" Text="Cedar Rapids, Iowa" IsEnabled="False" Style="{StaticResource TextBottom}"/>
+
+
+
+            <Label Grid.Column="1" Grid.Row="0" x:Name="lblProjectDescription" Content="Summary:" Style="{StaticResource LabelTop}"/>
+
+            <TextBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="8" x:Name="txtProjectDescription" Style="{StaticResource Description}" IsEnabled="False">
+                fsdkaljgewjgaag sdaghaireowifgheaslg dsraighoiarhoig;dskg ariohg odsjgslajgjdslfajioehgoier gjargsa
+                ajgkweiog aroigjioarehigae jgioerjiohgjadioghj ireiogjewa fewjgoidfjaiojka sigjrek ewk we ree g re g
+                ergw g a gre r g  rehwtrh rt ha eg ra ew few grh ds fdhtyheratewa a gfg re ga
+            </TextBox>
+
+        </Grid> <!-- END Grid for Displaying Project Information -->
+
+        <Grid Grid.Row="3"> <!-- START Grid for Back & Join Project Buttons -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="btnJoinLeaveProject" Content="Join Project" Style="{StaticResource CallToAction}" Click="btnJoinLeaveProject_Click"/>
+            <Button Grid.Column="1" x:Name="btnDonate" Content="Donate" Style="{StaticResource CallToActionSecondary}" Click="btnDonate_Click"/>
+            <Button Grid.Column="2" x:Name="btnEditProject" Content="Edit Project" Style="{StaticResource WarningButton}" Click="btnEditProject_Click"/>
+            <Button Grid.Column="3" x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+
+        </Grid> <!-- END Grid for Back & Join Project Buttons -->
+        
+    </Grid> <!-- END Page Grid - Page for Viewing Project Data -->
+</Page>

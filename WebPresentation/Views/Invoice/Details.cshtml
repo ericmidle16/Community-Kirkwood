@@ -1,0 +1,77 @@
+﻿<!--
+///<summary>
+/// Creator: Akoi Kollie
+/// Created: 2025-04-16
+/// Summary: View for viewing a single* invoices.
+/// Last updated by: Syler Bushlack
+/// Last updated: 2025/05/01
+/// Changes: included the projectID peramiter to be passed back to the index
+/// Last updated by: Skyann Heintz
+/// Last updated: 2025/05/01
+/// Changes: Added styling, updated how things were named to match others
+-->
+@model DataDomain.Invoice
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h2 class="m-0">Invoice Details</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.InvoiceID)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.InvoiceID)
+                </dd>
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.InvoiceNumber)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.InvoiceNumber)
+                </dd>
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.ExpenseID)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ExpenseID)
+                </dd>
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.ProjectID)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ProjectID)
+                </dd>
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.InvoiceDate)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.InvoiceDate)
+                </dd>
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+               <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <a asp-action="Edit" class="btn btn-warning ml-3" asp-route-id="@Model?.InvoiceID">Edit Status</a> 
+    @* <a asp-action="Index" asp-route-id="@Model?.ProjectID">Back to List</a> *@
+    <a href="@Url.Action("Index", new { projectId = Model.ProjectID })" class="btn btn-secondary">Back to Invoices</a>
+</div>

@@ -1,0 +1,69 @@
+﻿<!--
+<summary>
+    Creator:  Syler Bushlack
+    Created:  2025/02/04
+    Summary:  Xaml for the list of all projects user interface
+    Last Updated By: Stan Anderson
+    Last Updated: 2025/04/06
+    What was Changed: Updated UI layout
+    </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.ListOfAllProjects"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ListOfAllProjects" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Grid.RowSpan="2" Grid.Column="0" x:Name="lblProjects" Style="{StaticResource TitleLabel}" Content="Projects"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Filter By Name" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtSearchBar" Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBottom}" TextChanged="txtSearchBar_TextChanged"/>
+            
+            
+        </Grid>
+        
+        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="grdProjects"/>
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" x:Name="btnViewProject" Content="View Project" Style="{StaticResource CallToActionSecondary}" Click="btnProjectBar_Click" />
+            <Button Grid.Row="0" Grid.Column="1" x:Name="btnViewMyProjects" Content="My Projects" Style="{StaticResource CallToActionSecondary}" Click="btnViewMyProjects_Click" />
+            <Button Grid.Row="0" Grid.Column="2" x:Name="btnCreateProject" Content="Create New Project" Style="{StaticResource CallToAction}" Click="btnCreateProject_Click" FontSize="13"  />
+            <Button Grid.Row="0" Grid.Column="3" x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+        </Grid>
+    </Grid>
+</Page>

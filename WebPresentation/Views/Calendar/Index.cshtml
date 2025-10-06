@@ -1,0 +1,97 @@
+﻿@using System
+@using static WebPresentation.Controllers.CalendarItemVM
+
+@{
+    string[] dowLabels   = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+
+    var firstOfMonth     = new DateTime(Model.Year, Model.Month, 1);
+    int firstDow         = (int)firstOfMonth.DayOfWeek;
+    int daysInMonth      = DateTime.DaysInMonth(Model.Year, Model.Month);
+
+    var prevMonth        = firstOfMonth.AddMonths(-1);
+    var nextMonth        = firstOfMonth.AddMonths( 1);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a asp-action=""
+       asp-route-year="@prevMonth.Year"
+       asp-route-month="@prevMonth.Month"
+       class="btn btn-outline-secondary">&laquo; Prev</a>
+
+    <h2 class="mb-0">@Model.MonthName</h2>
+
+    <a asp-action=""
+       asp-route-year="@nextMonth.Year"
+       asp-route-month="@nextMonth.Month"
+       class="btn btn-outline-secondary">Next &raquo;</a>
+</div>
+
+<!-- month grid  -->
+<table class="table table-bordered calendar">
+    <thead class="text-center">
+        <tr>
+            @foreach (var d in dowLabels) // Day of week labels
+            {
+                <th scope="col">@d</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (int r = 0; r < Model.Grid.Count; r++) // up to 6 weeks
+        {
+            <tr>
+                @for (int c = 0; c < 7; c++) // Sun–Sat columns
+                {
+                    var cell     = Model.Grid[r][c];
+                    int absIndex = (r * 7) + c;
+                    int dayNum   = absIndex - firstDow + 1; // 1‑31 or out‑of‑range
+
+                    <td class="align-top" style="height:8rem;">
+                        @if (dayNum > 0 && dayNum <= daysInMonth)
+                        {
+                            <!-- day number -->
+                            <div class="fw-bold">@dayNum</div>
+
+                            <!-- each item fragment on this day -->
+                            @foreach (var frag in cell)
+                            {
+                                <span class="badge rounded-pill
+                                      @(frag.Item.Type switch
+                                        {
+                                            "Task"    => "bg-primary",
+                                            "Event"   => "bg-success",
+                                            "Project" => "bg-warning text-dark",
+                                            _         => "bg-secondary"
+                                        })"
+                                      title="@frag.Item.Name">
+
+                                    @* ▸ start | ― middle | ◂ end *@
+                                    @if (frag.IsStart && !frag.IsEnd)
+                                    {
+                                        @:&#x25B8;&#x00A0; <!-- ▸ -->
+                                    }
+                                    else if (!frag.IsStart && !frag.IsEnd)
+                                    {
+                                        @:&#x2015;&#x00A0; <!-- ― -->
+                                    }
+                                    else if (!frag.IsStart && frag.IsEnd)
+                                    {
+                                        @:&#x25C2;&#x00A0; <!-- ◂ -->
+                                    }
+
+                                    @frag.Item.Name
+                                </span><br />
+                            }
+                        }
+                    </td>
+                } <!-- end inner for -->
+            </tr>
+        } <!-- end outer for -->
+    </tbody>
+</table>
+
+<style>
+    /* tighten cell padding so more text fits */
+    .calendar td { padding: .25rem .4rem; }
+</style>

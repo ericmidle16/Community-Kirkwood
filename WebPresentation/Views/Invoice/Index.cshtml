@@ -1,0 +1,145 @@
+﻿<!--
+///<summary>
+/// Creator: Eric Idle 
+/// Created: 2025/04/10 
+/// Summary: The index view for seeing all invoices for a specific project
+
+/// Last Updated By: Skyann
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added.
+
+/// Last Updated By: Dat Tran
+/// Last Updated: 2025-04-28
+/// What Was Changed: Added Sweet Alerts. 
+
+/// Last Updated By: Syler Bushlack
+/// Last Updated: 2025-05-01
+/// What Was Changed: Removed the create button because invoices can only be created off of expenses
+
+/// Last Updated By: Skyann Heintz
+/// Last Updated: 2025-05-01
+/// What Was Changed: Renamed the "Change Status" to "Edit status" to fit the rest of styling
+/// </summary>
+-->
+@model IEnumerable<DataDomain.Invoice>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">All Invoices</h1>
+@if (TempData["CreateInvoice"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertCreateInvoiceShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["CreateInvoice"]'
+                });
+                sessionStorage.setItem('sweetAlertCreateInvoiceShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("CreateInvoice");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertCreateInvoiceShown');
+    </script>
+}
+@if (TempData["EditInvoice"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertEditInvoiceShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["EditInvoice"]'
+                });
+                sessionStorage.setItem('sweetAlertEditInvoiceShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("EditInvoice");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertEditInvoiceShown');
+    </script>
+}
+<p>
+    @* <a asp-action="Create" asp-route-projectId="@ViewBag.ProjectID" class="btn btn-success btn">Create New Invoice</a> *@
+</p>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            @*<th class="header"> *@
+            @*     @Html.DisplayNameFor(model => model.InvoiceID) *@
+            @* </th> *@
+           <th class="header">
+                Invoice Number
+            </th>
+           <th class="header" hidden>
+                @Html.DisplayNameFor(model => model.ExpenseID)
+            </th>
+            @*<th class="header"> *@
+            @*     @Html.DisplayNameFor(model => model.ProjectID) *@
+            @* </th> *@
+           <th class="header">
+                Invoice Date
+            </th>
+           <th class="header">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+           <th class="header">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+           <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @* <td> *@
+            @*     @Html.DisplayFor(modelItem => item.InvoiceID) *@
+            @* </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNumber)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ExpenseID)
+            </td>
+            @* <td> *@
+            @*     @Html.DisplayFor(modelItem => item.ProjectID) *@
+            @* </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                     <a href="@Url.Action("Edit", new { id = item.InvoiceID })" class="btn btn-warning btn-sm">Edit Status</a>
+                     <a href="@Url.Action("Details", new { id = item.InvoiceID })" class="btn btn-primary btn-sm">Details</a>
+                     @* <a href="@Url.Action("Delete", new { id = item.InvoiceID })" class="btn btn-danger btn-sm">Delete</a> *@
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

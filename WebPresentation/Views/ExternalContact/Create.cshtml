@@ -1,0 +1,104 @@
+﻿@* 
+    <summary>
+        Creator: Jacob McPherson
+        Created: 2025-04-17
+        Summary: View for Creating an External Contact
+        Updated By: Skyann Heintz
+        Updated: 2025-04-28
+        What Was Changed: Added styling
+    </summary>
+*@
+
+@model DataDomain.ExternalContact
+
+@{
+    ViewData["Title"] = "Create External Contact";
+    IEnumerable<string> externalContactTypes = ViewBag.Types;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create External Contact</h2>
+
+                <a asp-controller="ExternalContactType" asp-action="Create" class="btn btn-success mb-3 p-0">
+                     Create New Contact Type
+                </a>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="ExternalContactTypeID" class="control-label"></label>
+                        @Html.DropDownListFor(m => m.ExternalContactTypeID,
+                                 new SelectList(externalContactTypes),
+                                 new { @class = "form-control" })
+                        <span asp-validation-for="ExternalContactTypeID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ContactName" class="control-label"></label>
+                        <input asp-for="ContactName" class="form-control" />
+                        <span asp-validation-for="ContactName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GivenName" class="control-label"></label>
+                        <input asp-for="GivenName" class="form-control" />
+                        <span asp-validation-for="GivenName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FamilyName" class="control-label"></label>
+                        <input asp-for="FamilyName" class="form-control" />
+                        <span asp-validation-for="FamilyName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="JobTitle" class="control-label"></label>
+                        <input asp-for="JobTitle" class="form-control" />
+                        <span asp-validation-for="JobTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-secondary ml-3">Back to External Contacts</a>
+                    </div>
+
+                    <div class="text-danger text-center mt-2">@ViewBag.Error</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

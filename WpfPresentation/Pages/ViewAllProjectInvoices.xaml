@@ -1,0 +1,54 @@
+﻿<!--
+    <Summary>
+    Creator: Eric Idle
+    Created: 2025/04/10
+    Summary: Xaml page for user to view all invoices for a project.
+    Last Updated By: Syler Bushlack
+    Last Updated: 2025/04/30
+    What was Changed: added an onclick event to btnView
+    </Summary>
+-->
+    <Page x:Class="WpfPresentation.Pages.ViewAllProjectInvoices"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewAllProjectInvoices" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="1" Content="View Invoice Records By Project" Style="{StaticResource TitleLabel}"/>
+        <DataGrid x:Name="grdInvoice" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" CanUserReorderColumns="False" IsReadOnly="True"  RowHeight="30" />
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnView" Content="View Invoice" Style="{StaticResource CallToActionSecondary}" Click="btnView_Click"  />
+            <Button Grid.Column="1" x:Name="btnChange" Content="Change Invoice Status" Style="{StaticResource CallToAction}" Click="btnChange_Click"  />
+            <Button Grid.Column="2" x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click" />
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,66 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Christivie Mauwa
+    /// Created:  2025-02-28
+    /// Summary:  The home page for the application.
+    ///
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025/04/05
+    /// What was Changed: Updated to add styling
+    /// </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.ViewHomepage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewHomepage" Loaded="ViewHomepage_Loaded" Width="700" Height="450">
+
+    <Grid x:Name="ViewPage" Width="700" Height="450">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Label x:Name="txtName" Content="Welcome to CommUnity" Style="{StaticResource TitleLabel}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Label x:Name="lblOurMission" Content="Our Mission" Style="{StaticResource SmallTitleLabel}"/>
+        </Grid>
+
+        <TextBlock x:Name="txtMission" FontWeight="Normal" FontStyle="Italic" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0" Grid.RowSpan="3" TextWrapping="Wrap" />
+        
+        <Image x:Name="imgImage" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Source="/Images/community1.jpg"/>
+        
+
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnStartYouProject" Grid.Column="0" Content="Start your own Project" Style="{StaticResource CallToAction}" Click="btnStart_Click"  />
+            <Button x:Name="btnViewProject" Grid.Column="1" Content="View All Projects" Style="{StaticResource CallToActionSecondary}" Click="btnView_Click"  />
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnDonate" Grid.Column="0" Content="Donate to a Project" Style="{StaticResource CallToActionSecondary}" Click="btnDonate_Click"  />
+            <Button x:Name="btnViewEvent" Grid.Column="1" Content="View All Events" Style="{StaticResource CallToActionSecondary}" Click="btnViewEvent_Click"  />
+        </Grid>
+ </Grid>
+</Page>

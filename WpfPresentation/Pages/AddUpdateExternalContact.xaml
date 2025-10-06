@@ -1,0 +1,98 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Jacob Pherson
+    /// Created:  2025/02/18
+    /// Summary:  This is the page that allows you to add or update an external contact.
+    /// FrameLoad here.
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025/04/06
+    /// What was Changed: Updated layout and added buttons for external contact type
+    /// </summary>
+-->
+    <Page x:Class="WpfPresentation.Pages.frmAddUpdateExternalContact"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="AddExternalContact" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TitleLabel}" x:Name="lblTitle">Add New External Contact</Label>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="1.6*"/>
+                <ColumnDefinition  Width="3*"/>
+                <ColumnDefinition  Width="1.6*"/>
+                <ColumnDefinition  Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelLeft}" Content="Given Name:"/>
+            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtGivenName"/>
+
+            <Label Grid.Column="2" Grid.Row="0" Style="{StaticResource LabelLeft}" Content="Family Name:"/>
+            <TextBox Grid.Column="3" Grid.Row="0" x:Name="txtFamilyName" />
+
+            <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelLeft}" Content="Email:"/>
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtEmail" />
+
+            <Label Grid.Column="2" Grid.Row="1" Style="{StaticResource LabelLeft}" Content="Phone:"/>
+            <TextBox Grid.Column="3" Grid.Row="1" x:Name="txtPhone" />
+            
+            <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource LabelLeft}" Content="Job Title:"/>
+            <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtTitle" />
+
+            <Label Grid.Column="2"  Grid.Row="2" Style="{StaticResource LabelLeft}" Content="Company:"/>
+            <TextBox Grid.Column="3" Grid.Row="2" x:Name="txtCompanyName" />
+
+            
+
+            <Label Grid.Column="0" Grid.Row="4" Style="{StaticResource LabelTop}" Content="Address:" />
+            <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Style="{StaticResource Description}" x:Name="txtAddress" />
+
+            <Label Grid.Column="2" Grid.Row="4" Style="{StaticResource LabelTop}" Content="Description:"/>
+            <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" Style="{StaticResource Description}" x:Name="txtDescription" />
+
+
+            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelLeft}" Content="Contact Type"/>
+            <ComboBox x:Name="cmbType" Grid.Row="3" Grid.Column="1" />
+
+            <Button Grid.Row="3" Grid.Column="2" x:Name="btnManageTypes" Grid.ColumnSpan="2" Style="{StaticResource CallToActionSecondary}" Content="Add New External Contact Type" Click="btnManageTypes_Click"/>
+
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnSubmit" Style="{StaticResource CallToAction}" Grid.Column="0" Grid.Row="0" Content="Submit" Click="btnSubmit_Click"/>
+            <Button x:Name="btnCancel" Grid.Row="0" Grid.Column="1" Style="{StaticResource WarningButton}" Content="Cancel" Click="btnCancel_Click"/>
+        </Grid>
+    </Grid>
+</Page>

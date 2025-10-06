@@ -1,0 +1,112 @@
+﻿<!--
+/// <summary>
+/// Creator: Jacob McPherson
+/// Created: 2025-04-10
+/// Summary: View for Deleting an External Contact
+///
+/// Last Updated By: Skyann Heintz
+/// Last Updated: 2025-04-28
+/// What Was Changed: Styling added.
+///
+/// Updated By: Skyann Heintz
+/// Updated: 2025-04-30
+/// What Was Changed: Title was updated from h4 to h2
+/// </summary>
+-->
+@model DataDomain.ExternalContactVM
+
+@{
+    ViewData["Title"] = "Deactivate";
+}
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h2 class="m-0">Deactivate External Contact</h2>
+        </div>
+        <div class="card-body">
+            <h5 style="color: red;">Are you sure you want to deactivate this external contact?</h5>
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold" hidden>
+                    @Html.DisplayNameFor(model => model.ExternalContactID)
+                </dt>
+                <dd class="col-sm-9" hidden>
+                    @Html.DisplayFor(model => model.ExternalContactID)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.ExternalContactTypeID)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ExternalContactTypeID)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.TypeDescription)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.TypeDescription)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.ContactName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ContactName)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.GivenName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.GivenName)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.FamilyName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.FamilyName)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.JobTitle)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Active)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Active)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <form asp-action="Delete" method="post">
+        <button type="submit" class="btn btn-danger">Confirm Deactivation</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back to External Contacts</a>
+    </form>
+</div>

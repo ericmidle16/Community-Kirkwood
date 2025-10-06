@@ -1,0 +1,82 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-02-10
+    /// Summary:  This is the Page for creating a Background Check record
+    ///     to the system.
+    /// 
+    /// Updated By: Stan Anderson
+    /// Updated: 2025-04-08
+    /// What Changed: Updated UI
+    ///
+    /// Last Updated By: Kate Rich
+    /// Last Updated: 2025-04-14
+    /// What Was Changed: I adjusted the UI to ensure everything fits on the page & connects to other pages properly.
+    /// </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.createBackgroundCheckDesktop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="createBackgroundCheckDesktop" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="lblTitle" Content="Create Background Check" Padding="0 0 0 05" VerticalAlignment="Top" Style="{StaticResource TitleLabel}"/>
+
+
+        <!-- Investigator First Name - Read Only, prepopulated & can't be changed -->
+        <Label Grid.Row="1" Grid.Column="1" Content="Investigator's Given Name (First Name):" Style="{StaticResource LabelTop}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtInvestigatorFirstName" Style="{StaticResource TextBottom}" IsReadOnly="True"/>
+        <!-- Investigator Last Name - Read Only, prepopulated & can't be changed -->
+        <Label Grid.Row="1" Grid.Column="2" Content="Investigator's Family Name (Last Name):" Style="{StaticResource LabelTop}"/>
+        <TextBox Grid.Row="2" Grid.Column="2" x:Name="txtInvestigatorLastName" Style="{StaticResource TextBottom}" IsReadOnly="True"/>
+
+        <!-- User First Name - Read Only, prepopulated & can't be changed -->
+        <Label Grid.Row="3" Grid.Column="1" Content="Volunteer's Given Name (First Name):" Style="{StaticResource LabelTop}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtTargetFirstName" Style="{StaticResource TextBottom}" IsReadOnly="True"/>
+        <!-- User Last Name - Read Only, prepopulated & can't be changed -->
+        <Label Grid.Row="3" Grid.Column="2" Content="Volunteer's Family Name (Last Name):" Style="{StaticResource LabelTop}"/>
+        <TextBox Grid.Row="4" Grid.Column="2" x:Name="txtTargetLastName" Style="{StaticResource TextBottom}" IsReadOnly="True"/>
+
+        <!-- Project Name - Read Only, prepopulated & can't be changed -->
+        <Label Grid.Row="5" Grid.Column="1" Content="Name of Project:" Style="{StaticResource LabelTop}"/>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtProjectName" Style="{StaticResource TextBottom}" IsReadOnly="True"/>
+
+        <!-- Status - Read Only, new ones are always 'In Progress' -->
+        <Label Grid.Row="5" Grid.Column="2" Content="Background Check Status:" Style="{StaticResource LabelTop}"/>
+        <ComboBox Grid.Row="6" Grid.Column="2" x:Name="cboBackgroundStatus" Text="In Progress" Style="{StaticResource ComboUnder}" IsReadOnly="True"/>
+
+        <!-- Reason/Description -->
+        <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" x:Name="lblDescription" Content="Reason for Background Check:" Style="{StaticResource LabelTop}"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" x:Name="txtDescription" Style="{StaticResource Description}"/>
+
+
+        <Button Grid.Column="1" Grid.Row="9" x:Name="btnSubmit" Content="Submit" Style="{StaticResource CallToAction}" Click="btnSubmit_Click"/>
+        <Button Grid.Column="2" Grid.Row="9" x:Name="btnBack" Content="Back to List" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+
+
+    </Grid>
+</Page>

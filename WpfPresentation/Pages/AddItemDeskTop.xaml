@@ -1,0 +1,62 @@
+﻿<!--
+    <Summary>
+    Creator: Skyann Heintz
+    Created: 2025/02/10
+    Summary: XAML page for the Add ItemDeskTop screen. 
+    This page allows users to input the items needed for a project. The
+    user can input the items name, quantity of the item that is needed, the price
+    of the item, an a description. The description isn't required.
+    Last Updated By: Stan Anderson
+    Last Updated: 2025/04/07
+    What Was Changed: Updated UI
+    </Summary>
+-->
+<Page x:Class="WpfPresentation.Pages.AddItemDeskTop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="AddItemDeskTop">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Add Item" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource TitleLabel}"/>
+
+        <Label Content="Item Name" Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelTop}"/>
+        <TextBox x:Name="tbItemName" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource TextBottom}"/>
+
+        <Label Content="Quantity" Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelTop}"/>
+        <TextBox x:Name="tbQuantity" Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBottom}"/>
+
+
+        <Label Content="Price" Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelTop}"/>
+        <TextBox x:Name="tbPrice" Grid.Row="4"  Grid.Column="2" Style="{StaticResource TextBottom}"/>
+
+        <Label Content="Description" Grid.Row="5" Grid.Column="1" Style="{StaticResource LabelTop}"/>
+        <TextBox x:Name="tbDescription" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource Description}" AcceptsReturn="True"/>
+
+            <Button Content="Save" Grid.Column="1" Grid.Row="7" Style="{StaticResource CallToAction}" Click="Save_Click"/>
+            <Button Content="Cancel"  Grid.Column="2" Grid.Row="7" Style="{StaticResource WarningButton}" Click="Cancel_Click"/>
+
+    </Grid>
+</Page>

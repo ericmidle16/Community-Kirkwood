@@ -1,0 +1,116 @@
+﻿@* 
+    <summary>
+        Ellie Wacker
+        Created: 2025-03-27
+        View for creating a new vehicle
+
+        Updated By: Skyann Heintz
+        Updated: 2025-04-28
+        What Was Changed: Styling added to page.
+
+        Updated By: Dat Tran
+        Updated: 2025-05-01
+        What Was Changed: Added a message under the License Plate label specifying instructions for letters in a License Plate number.
+    </summary>
+*@
+
+@model DataDomain.Vehicle
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create Vehicle</h2>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" name="id" value="@ViewBag.UserID" />
+
+                    <div class="form-group">
+                        <label asp-for="VehicleID" class="control-label">VIN Number</label>
+                        <input asp-for="VehicleID" class="form-control" />
+                        <span asp-validation-for="VehicleID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Color" class="control-label"></label>
+                        <input asp-for="Color" class="form-control" />
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Year" class="control-label"></label>
+                        <input asp-for="Year" type="number" class="form-control" />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LicensePlateNumber" class="control-label">License Plate Number</label>
+                        <br />
+                        <label style="color: red;">If letters are in the license plate, they must be capitalized.</label>
+                        <input asp-for="LicensePlateNumber" class="form-control" />
+                        <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input class="form-check-input" asp-for="InsuranceStatus" />
+                        <label class="form-check-label" asp-for="InsuranceStatus">Is Insured</label>
+                        <span asp-validation-for="InsuranceStatus" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Make" class="control-label"></label>
+                        <input asp-for="Make" class="form-control" />
+                        <span asp-validation-for="Make" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Model" class="control-label"></label>
+                        <input asp-for="Model" class="form-control" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NumberOfSeats" class="control-label">Number of Seats</label>
+                        <input asp-for="NumberOfSeats" class="form-control" />
+                        <span asp-validation-for="NumberOfSeats" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TransportUtility" class="control-label">What can your vehicle transport?</label>
+                        <select asp-for="TransportUtility" class="form-control" multiple size="6">
+                            <option value="Adults">Adults</option>
+                            <option value="Children">Children</option>
+                            <option value="Animals">Animals</option>
+                            <option value="Equipment">Equipment</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Plants">Plants</option>
+                            <option value="Dirt/Sand/Salt">Dirt/Sand/Salt</option>
+                            <option value="Rocks">Rocks</option>
+                            <option value="Appliances">Appliances</option>
+                            <option value="Oil">Oil</option>
+                            <option value="Paint/Sealers/Stain">Paint/Sealers/Stain</option>
+                        </select>
+                        <span asp-validation-for="TransportUtility" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" asp-route-id="@ViewBag.UserID" class="btn btn-secondary ml-3">Back to Vehicles</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

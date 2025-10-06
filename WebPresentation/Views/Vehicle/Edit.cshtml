@@ -1,0 +1,122 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Ellie Wacker
+    /// Created: 2025-04-24
+    /// Summary: View to edit a single vehicle
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-28
+    /// What Was Changed: Styling was added to the page.
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Title was updated from h4 to h2
+-->
+
+@model DataDomain.Vehicle
+
+@{
+    ViewData["Title"] = "Edit Vehicle";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit Vehicle</h2>
+
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger text-center">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="VehicleID" />
+                    <input type="hidden" name="userID" value="@ViewBag.UserID" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label class="control-label">Color</label>
+                        <input asp-for="Color" class="form-control" maxlength="20" />
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Year</label>
+                        <input asp-for="Year" class="form-control" />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">License Plate</label>
+                        <input asp-for="LicensePlateNumber" class="form-control" maxlength="15" />
+                        <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Make</label>
+                        <input asp-for="Make" class="form-control" maxlength="50" />
+                        <span asp-validation-for="Make" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Model</label>
+                        <input asp-for="Model" class="form-control" maxlength="50" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Number of Seats</label>
+                        <input asp-for="NumberOfSeats" class="form-control" />
+                        <span asp-validation-for="NumberOfSeats" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label d-block">Transport Utility</label>
+                        @foreach (var item in ViewBag.TransportItems)
+                        {
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="TransportUtility" value="@item"
+                                       class="form-check-input"
+                                @(Model.TransportUtility != null && Model.TransportUtility.Contains(item) ? "checked" : "") />
+                                <label class="form-check-label">@item</label>
+                            </div>
+                        }
+                        <span asp-validation-for="TransportUtility" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox"
+                               id="Active"
+                               name="Active"
+                               class="form-check-input"
+                        @(Model.Active.HasValue && Model.Active.Value ? "checked" : "")
+                               value="true" />
+                        <label class="form-check-label" for="Active">
+                            Are you willing to drive this vehicle currently?
+                        </label>
+                        <input type="hidden" name="Active" value="false" />
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input asp-for="InsuranceStatus" class="form-check-input" />
+                        <label asp-for="InsuranceStatus" class="form-check-label">Is this vehicle insured?</label>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="Index" asp-route-id="@ViewBag.UserID" class="btn btn-secondary ml-3">Back to Vehicles </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,70 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Skyann Heintz
+    /// Created: 2025/03/28
+    /// Summary:  This view handles the user inputing their avalibility.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-04
+    /// What Was Changed: Added styling.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Title was updated from h4 to h2
+-->
+@model DataDomain.Availability
+
+@{
+    ViewData["Title"] = "Add Availability";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6" ">
+            <div class="card shadow-sm p-4"">
+                <h2 class="text-center mb-4">Enter Your Availability</h2>
+                <form asp-action="AddAvailability">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        @* <label asp-for="UserID" class="control-label"></label> *@
+                        <input asp-for="UserID" class="form-control" value="@Model.UserID" hidden />
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsAvailable" /> Available All Day
+                            <label style="color: red;">By checking Available All Day, the form will adjust your start and end times to be 7 am to 3 pm after submission.</label>
+                        </label>
+
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="RepeatWeekly" /> Repeats Weekly
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" class="form-control" type="datetime-local" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input asp-for="EndDate" class="form-control" type="datetime-local" value="@Model.EndDate.ToString("yyyy-MM-ddTHH:mm")" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success"/>
+                        <a asp-action="Availability" class="btn btn-secondary ml-3">Back to Availability</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,25 @@
+﻿<Page x:Class="WpfPresentation.CreatePost"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CreatePost">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="tbxBoxPost" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <Button x:Name="btnReply" Grid.Column="1" Content="Reply" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Click="btnReply_Click" Style="{StaticResource CallToAction}"/>
+    </Grid>
+</Page>

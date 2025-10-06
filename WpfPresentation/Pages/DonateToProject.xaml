@@ -1,0 +1,75 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Christivie Mauwa
+    /// Created:  2025-02-06
+    /// Summary:  This is the Page for donating to a project
+    ///
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025-04-07
+    /// What Was Changed: Updated UI
+    /// </summary>
+-->
+    
+    <Page x:Class="WpfPresentation.Pages.DonateToProject"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="DonateToProject" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Content="Donate To Project" Style="{StaticResource TitleLabel}"/>
+            
+            <Label Grid.Row="1" Grid.Column="1" Content="Project Name:" Style="{StaticResource LabelLeft}"/>
+            <TextBox x:Name="txtProjectName" Grid.Column="2" Grid.Row="1" IsReadOnly="True"/>
+
+            <Label Grid.Row="2" Grid.Column="1" Content="Donation Type:" Style="{StaticResource LabelLeft}"/>
+            <ComboBox x:Name="cbDonationType" IsEnabled="True" Grid.Row="2" Grid.Column="2"/>
+
+            <Label Grid.Row="3" Grid.Column="1" Content="Amount:" Style="{StaticResource LabelLeft}"/>
+            <TextBox x:Name="txtAmount" Grid.Row="3" Grid.Column="2" />
+
+            <Label Grid.Row="4" Grid.Column="1" Content="Date:" Style="{StaticResource LabelLeft}"/>
+            <TextBox x:Name="txtDate" Grid.Row="4" Grid.Column="2" IsReadOnly="True"/>
+
+            <Label Grid.Row="5" Grid.Column="1" Content="Username:" Style="{StaticResource LabelLeft}"/>
+            <TextBox x:Name="txtUserName" IsReadOnly="True" Grid.Row="5" Grid.Column="2" />
+
+            <CheckBox Content="Donate Anonymously" x:Name="chkAnonymous" Grid.Row="6" Grid.Column="2" Checked="chkAnonymous_Checked" Unchecked="chkAnonymous_Unchecked" Style="{StaticResource CheckBoxBottom}"/>
+
+            <Label Grid.Row="6" Grid.Column="1" Content="Comment:" Style="{StaticResource LabelTop}"/>
+            <TextBox x:Name="txtDescription" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource Description}" AcceptsReturn="True" />
+
+            <Grid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+           
+            <Button x:Name="btnPay" Grid.Column="0" Content="Pay" Click="btnPay_Click" Style="{StaticResource CallToAction}"/>
+            <Button x:Name="btnCancel" Grid.Column="1" Content="Cancel" Click="btnCancel_Click" IsCancel="True" Style="{StaticResource WarningButton}"/>
+         </Grid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,81 @@
+﻿@* <summary> *@
+@*      Creator:  Eric Idle *@
+@*      Created:  2025/04/10 *@
+@*      Summary:  The index view for seeing all expenses for a specific project *@
+@*      Last Updated By: Eric Idle *@
+@*      Last Updated: 2025/04/30 *@
+@*      What was Changed: Added Sky's styling'
+        Last Updated By: Skyann Heintz *@
+@*      Last Updated: 2025/05/01 *@
+@*      What was Changed: Added more styling
+*@
+@* </summary> *@
+
+@model IEnumerable<DataDomain.Expense>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">All Expenses</h1>
+
+<p>
+    <a asp-action="Create" asp-route-projectId="@ViewBag.ProjectID" class="btn btn-success btn"> Create New Expense</a>
+</p>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ExpenseID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>*@
+            <th class="header">
+                Expense Type
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ExpenseID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseTypeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        @* @Html.ActionLink("Edit", "Edit", new { id=item.ExpenseID }) | *@
+                        <a href="@Url.Action("Details", new { expenseId = item.ExpenseID, projectId = item.ProjectID })" class="btn btn-primary btn-sm">Details</a>
+                        @* @Html.ActionLink("Details", "Details", new { expenseId = item.ExpenseID, projectId = item.ProjectID }) *@
+                        @* @Html.ActionLink("Delete", "Delete", new { id = item.ExpenseID }) *@
+                    </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

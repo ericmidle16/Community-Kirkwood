@@ -1,0 +1,96 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Jennifer Nicewanner
+    /// Created: 2025-04-24
+    /// Summary: View to see volunteers for a project
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-28
+    /// What Was Changed: Styling was added to the page.
+    /// Updated By: Dat Tran
+    /// Updated: 2025-04-28
+    /// What Was Changed: Corrected the issue with viewing a volunteer's user profile. 
+    ///
+     /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Adjusted the colors on the buttons. I also adjusted the size to be small.
+        Button placement was moved to allow a break in colors
+-->
+@model IEnumerable<DataDomain.User>
+
+@{
+    ViewData["Title"] = "Index";
+    var ProjectId = ViewBag.ProjectID;
+}
+
+<h1 class="text-center">All Volunteers</h1>
+@if(TempData["UpdateRole"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertUpdateRoleShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["UpdateRole"]'
+                });
+                sessionStorage.setItem('sweetAlertUpdateRoleShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("UpdateRole");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertUpdateRoleShown');
+    </script>
+}
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.GivenName)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.FamilyName)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach(var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GivenName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <a href="@Url.Action("VolunteerDetails", new { id = item.UserID })" class="btn btn-info btn-sm">Volunteer Profile</a> 
+                    <a href="@Url.Action("UpdateProjectRole", "ProjectRole", new { userId = item.UserID, projectId = ProjectId })" class="btn btn-warning btn-sm">Project Roles</a>
+                    <a href="@Url.Action("UserProfile", "User", new { email = item.Email })" class="btn btn-info btn-sm">User Profile</a>  
+                </div>
+            </tr>
+}
+    </tbody>
+</table>

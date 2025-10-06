@@ -1,0 +1,145 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Stan Anderson
+    /// Created:  2025-04-16
+    /// Summary:  This lets you see all the tasks for an event
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page.
+
+    /// Updated By: Dat Tran
+    /// Updated: 2025-04-27
+    /// What Was Changed: Sweet Alerts added for task related CRUD functions.
+    /// </summary>
+-->
+
+@model IEnumerable<DataDomain.Task>
+
+@{
+    ViewData["Title"] = "Tasks for Event";
+    int eventID = ViewBag.EventID;
+    string eventName = ViewBag.EventName;
+    int projectID = ViewBag.ProjectID;
+}
+
+<h1 class="text-center"> Tasks for @eventName (@Model.Count())</h1>
+@if (TempData["TaskAdded"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertAddTaskShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["TaskAdded"]'
+                });
+                sessionStorage.setItem('sweetAlertAddTaskShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("TaskAdded");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddTaskShown');
+    </script>
+}
+@if (TempData["TaskUpdated"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertEditTaskShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["TaskUpdated"]'
+                });
+                sessionStorage.setItem('sweetAlertEditTaskShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("TaskUpdated");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertEditTaskShown');
+    </script>
+}
+<p>
+    <a href="@Url.Action("Create", new { eventID = eventID })" class="btn btn-success btn-sm">Create New Task</a>
+</p>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.TaskID)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.TaskType)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.EventID)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.TaskID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskType)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.EventID)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <a href="@Url.Action("Details", new { id = item.TaskID })" class="btn btn-primary btn-sm">Details</a>
+                    <a href="@Url.Action("Edit", new { id = item.TaskID, task = item })" class="btn btn-warning btn-sm">Edit</a>
+
+                    @* @Html.ActionLink("Delete", "Delete", new { id = item.TaskID }) *@
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

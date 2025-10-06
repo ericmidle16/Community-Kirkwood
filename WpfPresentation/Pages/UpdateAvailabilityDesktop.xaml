@@ -1,0 +1,98 @@
+﻿<!--
+    <Summary>
+    Creator: Skyann Heintz
+    Created: 2025/02/10
+    Summary: XAML page for the Add AvailabilityDeskTop screen. 
+    This page allows users to input their availability, including 
+    specifying all-day availability, weekly repetition up to 4 weeks, start and 
+    end dates, and times. A style is applied to DatePicker elements to remove borders
+    for a cleaner UI. This is done by BorderThickness="0" which removes the visible border by
+    setting the thickness to zero. Along with using BorderBrush="Transparent" which ensures that
+    no border color is applied, even if the border was not zero. Without the style there would be 
+    a light blue border around the date picker elements.
+    Last Updated By: Stan Anderson
+    Last Updated: 2025/04/26
+    What Was Changed: Updated UI
+    </Summary>
+-->
+<Page x:Class="WpfPresentation.Pages.UpdateAvailabilityDesktop"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="UpdateAvailabilityDesktop">
+    <Page.Resources>
+        <Style TargetType="DatePicker">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height=".75*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height=".75*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.25*"/>
+            <RowDefinition Height=".5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Update Availability" Style="{StaticResource TitleLabel}" Visibility="Visible"/>
+
+        <Label Grid.Row="0" Grid.Column="1" Content="User ID:" Style="{StaticResource LabelLeft}" Visibility="Hidden"/>
+        <TextBox Grid.Row="0" Grid.Column="2" x:Name="txtUserID" IsEnabled="False" Visibility="Hidden"/>
+
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Do you have availability all day?" Style="{StaticResource LabelTop}"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10,2">
+            <RadioButton x:Name="rbAllDayYes" Content="Yes" GroupName="AllDay" Margin="5" Checked="AllDay_Checked"/>
+            <RadioButton x:Name="rbAllDayNo" Content="No" GroupName="AllDay" Margin="5" Checked="AllDay_Checked"/>
+        </StackPanel>
+
+        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="Does this date and time repeat weekly for the next 4 weeks?" Style="{StaticResource LabelTop}"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10,2">
+            <RadioButton x:Name="rbRepeatWeeklyYes" Content="Yes" GroupName="RepeatWeekly" Margin="5"/>
+            <RadioButton x:Name="rbRepeatWeeklyNo" Content="No" GroupName="RepeatWeekly" Margin="5"/>
+        </StackPanel>
+
+        <Label Grid.Row="5" Grid.Column="1" Content="Select your Start Date:" Style="{StaticResource LabelLeft}"/>
+        <DatePicker Grid.Row="5" x:Name="dpStartDate" Grid.Column="2" Style="{StaticResource DatePicker}"/>
+
+        <Label Grid.Row="6" Grid.ColumnSpan="2" Content="Select your End Date:" Style="{StaticResource LabelLeft}"/>
+        <DatePicker Grid.Row="6" x:Name="dpEndDate" Grid.Column="2" Style="{StaticResource DatePicker}"/>
+
+        <Label Grid.Row="7" Grid.Column="1" Content="Select your Start Time:" Style="{StaticResource LabelLeft}"/>
+        <ComboBox Grid.Row="7" x:Name="cbStartTime" IsEnabled="False" Grid.Column="2"/>
+
+        <Label Grid.Row="8" Grid.Column="1" Content="Select your End Time:" Style="{StaticResource LabelLeft}"/>
+        <ComboBox Grid.Row="8" x:Name="cbEndTime" IsEnabled="False" Grid.Column="2"/>
+
+
+        <Grid Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Save" Style="{StaticResource CallToAction}" Click="SaveAvailabilityButton_Click"/>
+
+            <Button Grid.Column="1" Content="Cancel" Style="{StaticResource WarningButton}" Click="CancelButton_Click"/>
+
+
+        </Grid>
+
+
+    </Grid>
+</Page>

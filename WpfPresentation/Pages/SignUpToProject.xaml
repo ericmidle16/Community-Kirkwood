@@ -1,0 +1,39 @@
+﻿<!--
+    <Summary>
+    Creator: Akoi Kollie
+    Created: 2025/03/19
+    Summary: Xaml page for the volunteer to sign up for project. This UI that the user use to sign up for a project
+    and submit the form and wait for approved notification message.
+    Last Updated By: Stan Anderson
+    Last Updated: 2025/04/07
+    </Summary>
+--> 
+<Page x:Class="WpfPresentation.Pages.SignUpToProject"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="SignUpToProject">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Join a Project as Volunteer?" Style="{StaticResource TitleLabel}"/>
+        
+        <Button x:Name="btnJoinedProject" Grid.Row="6" Grid.Column="1" Content="Join Project as Volunteer" Click="btnJoinedProject_Click" Style="{StaticResource CallToAction}"/>
+        <Button x:Name="btnBack" Grid.Row="6" Grid.Column="2" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click" />
+
+    </Grid>
+</Page>

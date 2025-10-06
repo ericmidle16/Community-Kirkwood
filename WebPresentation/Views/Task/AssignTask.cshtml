@@ -1,0 +1,77 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Stan Anderson
+    /// Created:  2025-04-16
+    /// Summary:  This page lets you pick a task and assign it to the volunteer
+    ///
+    /// Last Updated By: Skyann Heintz
+    /// Last Updated: 2025-04-27
+    /// What Was Changed: Styling added.
+    /// </summary>
+-->
+@model DataDomain.TaskAssigned
+
+@{
+    ViewData["Title"] = "Assign Task to Volunteer";
+    int eventID = ViewBag.EventID;
+    string eventName = ViewBag.EventName;
+    int projectID = ViewBag.ProjectID;
+    string userName = ViewBag.UserName;
+    IEnumerable<DataDomain.Task> tasks = ViewBag.Tasks;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Assign Task for @userName</h2>
+                <h3 class="text-center mb-4">For @eventName</h3>
+                <hr />
+
+                <form asp-action="AssignTask" asp-route-eventID=@eventID asp-route-eventName=@eventName asp-route-projectID=@projectID>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="TaskID" class="control-label">Task</label>
+                        @if (tasks.Count() == 0)
+                        {
+                            <p class="text-danger">There are no tasks for this event.</p>
+                        }
+                        else
+                        {
+                            <select asp-for="TaskID" class="form-control">
+                                @foreach (DataDomain.Task task in tasks)
+                                {
+                                    <option value=@task.TaskID>@task.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="TaskID" class="text-danger"></span>
+                        }
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label asp-for="UserID" class="control-label"></label>
+                        <input asp-for="UserID" class="form-control" />
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <input type="submit" value="Assign Task" class="btn btn-success" />
+                        @Html.ActionLink("Change Volunteer", "ViewUnassignedVolunteers", new { eventID = @eventID, eventName = @eventName, projectID = @projectID },
+                                 new { @class = "btn btn-info" })
+                        @Html.ActionLink("Back to Volunteers Assigned ", "ViewEventVolunteers", new { eventID = @eventID, eventName = @eventName, projectID = @projectID },
+                                 new { @class = "btn btn-secondary" })
+                    </div>
+                </form>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,62 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Jennifer Nicewanner
+    /// Created:  2025-02-14
+    /// Summary:  This is the Page for viewing the list of volunteers
+    ///
+    /// Last Updated By: Eric Idle
+    /// Last Updated: 2025-04-21
+    /// What Was Changed: Updated UI and added connections
+    
+    Last Updated By: Chase Hannen
+    /// Last Updated: 2025-04-25
+    /// What Was Changed: Updated UI and added connections
+    /// </summary>
+-->
+    
+    <Page x:Class="WpfPresentation.Pages.ViewVolunteerList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewVolunteerList"  Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="lblVolunteers" Grid.Row="0" Grid.Column="1"  Grid.ColumnSpan="4" Style="{StaticResource TitleLabel}" Content="Project Volunteers"/>
+        <DataGrid x:Name="VolunteersDataGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan ="4" SelectionMode="Single" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding GivenName}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding FamilyName}"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="btnBackgroundChecks" Grid.Column="1" Grid.Row="2" Content="Background Checks" Style="{StaticResource CallToActionSecondary}" Click="btnBackgroundChecks_Click"/>
+        <Button x:Name="btnViewRequests" Grid.Column="2" Grid.Row="2" Content="View Requests" Style="{StaticResource CallToActionSecondary}" Click="btnViewRequests_Click"/>
+        <Button x:Name="btnViewUser" Grid.Column="3" Grid.Row="2" Content="View Profile" Style="{StaticResource CallToActionSecondary}" Click="btnViewUser_Click"/>
+        <Button Grid.Column="4" Grid.Row="2" Content="Back" Style="{StaticResource BackButton}" Click="Button_Click"/>
+        <Button x:Name="btnRoles" Grid.Column="2" Grid.Row="3" Content="Roles" Style="{StaticResource CallToActionSecondary}" Click="btnRoles_Click" />
+        <Button x:Name="btnSchedule" Grid.Column="3" Grid.Row="3" Content="Schedule" Style="{StaticResource CallToActionSecondary}" Click="btnSchedule_Click" />
+
+        <Button x:Name="btnRemoveVolunteer" Grid.Column="1" Grid.Row="3" Style="{StaticResource DangerButton}" Content="Remove Volunteer" Click="btnRemoveVolunteer_Click"/>
+    </Grid>
+</Page>

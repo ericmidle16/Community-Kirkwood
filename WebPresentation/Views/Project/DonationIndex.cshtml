@@ -1,0 +1,82 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Akoi Kollie
+    /// Created: 2025-04-24
+    /// Summary: View for Donation Index
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Added styling to the page
+    ///
+    /// Updated By: Syler Bushlack
+    /// Updated: 2025-05-01
+    /// What Was Changed: fixed details button to show the invoice details and removed the edit and delete 
+        button as those features were not implemented
+-->
+@model IEnumerable<DataDomain.Donation>
+
+@{
+    ViewData["Title"] = "DonationIndex";
+}
+
+<h1 class="text-center">Donation Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="header">
+                Donation Type
+            </th>
+            <th class="header" hidden>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th class="header" hidden>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th class="header">
+                Donation Date
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonationType)
+            </td>
+                <td hidden>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+                <td hidden>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                        @* <a asp-controller="Donations" asp-action="Edit" asp-route-id="@item.DonationID" class="btn btn-warning btn-sm">Edit</a> *@
+                        <a asp-controller="Donations" asp-action="Details" asp-route-id="@item.DonationID" class="btn btn-primary btn-sm">Details</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.DonationID" class="btn btn-danger btn-sm">Delete</a> *@
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

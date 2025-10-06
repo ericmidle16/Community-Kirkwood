@@ -1,0 +1,111 @@
+﻿<!--
+///<summary>
+/// Creator: Jackson Manternach
+/// Created: 2025-04-24
+/// Summary: View to update avaibaility 
+
+/// Last Updated By: Skyann Heintz
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added. 
+/// 
+/// Updated By: Skyann Heintz
+/// Updated: 2025-04-30
+/// What Was Changed: Title was updated from h4 to h2
+/// </summary>
+-->
+
+@model DataDomain.Availability
+
+@{
+    ViewData["Title"] = "Update Availability";
+    string startTimeValue = Model.StartDate.ToString("HH:mm");
+    string endTimeValue = Model.EndDate.ToString("HH:mm");
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Update Availability</h2>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger text-center">
+                        <strong>@ViewBag.Error</strong>
+                    </div>
+                }
+
+                <form asp-action="Update" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="AvailabilityID" />
+                    <input type="hidden" asp-for="UserID" />
+
+                    <div class="form-group">
+                        <label>Available All Day</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="isAvailableTrue" name="isAvailable" value="true" @(Model.IsAvailable ? "checked" : "") />
+                                <label class="form-check-label" for="isAvailableTrue">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="isAvailableFalse" name="isAvailable" value="false" @(!Model.IsAvailable ? "checked" : "") />
+                                <label class="form-check-label" for="isAvailableFalse">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Repeats Weekly</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="repeatWeeklyTrue" name="repeatWeekly" value="true" @(Model.RepeatWeekly ? "checked" : "") />
+                                <label class="form-check-label" for="repeatWeeklyTrue">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="repeatWeeklyFalse" name="repeatWeekly" value="false" @(!Model.RepeatWeekly ? "checked" : "") />
+                                <label class="form-check-label" for="repeatWeeklyFalse">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StartDate">Start Date</label>
+                        <input type="date" id="StartDate" name="StartDate" class="form-control" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                        <span class="text-danger">@Html.ValidationMessage("StartDate")</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startTime">Start Time</label>
+                        <input type="time" id="startTime" name="startTime" class="form-control" value="@startTimeValue" />
+                        <span class="text-danger">@Html.ValidationMessage("startTime")</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EndDate">End Date</label>
+                        <input type="date" id="EndDate" name="EndDate" class="form-control" value="@Model.EndDate.ToString("yyyy-MM-dd")" />
+                        <span class="text-danger">@Html.ValidationMessage("EndDate")</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endTime">End Time</label>
+                        <input type="time" id="endTime" name="endTime" class="form-control" value="@endTimeValue" />
+                        <span class="text-danger">@Html.ValidationMessage("endTime")</span>
+                        <small class="form-text text-muted">Note: Time inputs will be ignored if "Available All Day" is set to Yes</small>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="Availability" class="btn btn-secondary ml-3">Back to Availability</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

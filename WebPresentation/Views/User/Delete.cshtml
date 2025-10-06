@@ -1,0 +1,48 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Jacob McPherson
+    /// Created: 2025-04-24
+    /// Summary: View to delete a user account
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-28
+    /// What Was Changed: Styling was added to the page.
+-->
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Delete Profile</h2>
+
+                <p class="text-center text-danger">
+                    You are about to deactivate your profile.<br />
+                    If you hit submit, you will no longer be able to access your account or login.<br />
+                    If this is not what you want to do, please hit cancel.
+                </p>
+
+                <form asp-action="Delete">
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" />
+                        <div class="text-danger">@ViewBag.Error</div>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                        <a class="btn btn-secondary ml-3" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Back To Profile</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

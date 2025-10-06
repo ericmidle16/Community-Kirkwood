@@ -1,0 +1,116 @@
+﻿@* <summary> *@
+@*     Creator: Stan Anderson *@
+@*     Created: 2025-03-28 *@
+@*     Summary: View for the External Contact.
+*@
+@*     Last Upaded By:Skyann Heintz *@
+@*     Last Updated: 2025-04-04 *@
+@*     What Was Changed: Added styling. Removed the edit button on this view. It is on the 
+            main view.
+       Last Upaded By:Skyann Heintz *@
+@*     Last Updated: 2025-04-28 *@
+@*     What Was Changed: Adjusted styling
+       Updated By: Skyann Heintz
+       Updated: 2025-04-30
+       What Was Changed: Title was updated from h4 to h2
+@* </summary> *@
+
+@model DataDomain.ExternalContact
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h2 class="m-0">External Contact Details</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class = "col-sm-2" hidden>
+                    @Html.DisplayNameFor(model => model.ExternalContactID)
+                </dt>
+                <dd class="col-sm-9" hidden>
+                    @Html.DisplayFor(model => model.ExternalContactID)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.ExternalContactTypeID)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ExternalContactTypeID)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.ContactName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ContactName)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.GivenName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.GivenName)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.FamilyName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.FamilyName)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+                <dt class ="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.JobTitle)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.AddedBy)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.AddedBy)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.LastUpdatedBy)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.LastUpdatedBy)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Active)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Active)
+                </dd>
+            </dl>
+        </div>
+     </div>
+
+    <div class="mt-3 text-center">
+        <a asp-action="Index" class="btn btn-secondary">Back to External Contacts</a>
+    </div>
+</div>

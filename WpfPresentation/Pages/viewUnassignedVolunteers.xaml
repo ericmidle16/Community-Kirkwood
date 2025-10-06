@@ -1,0 +1,65 @@
+﻿ <!--
+///<summary>
+/// Creator: Dat Tran
+/// Created: 2025-02-26
+/// Summary: This xaml code displays a data grid with the sample data from the stored procedure in viewUnnassignedVolunteers.sql, along with the buttons
+/// from the UI in the Use case. 
+/// Last updated by: Stan Anderson
+/// Last updated: 2025-04-06
+/// Changes: Updated UI
+///</summary>
+    -->
+<Page x:Class="WpfPresentation.Pages.viewUnassignedVolunteers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="viewUnassignedVolunteers"
+      >
+
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label Name="lblUnassignedVolunteers" Style="{StaticResource TitleLabel}">Unassigned Volunteers</Label>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                <DataGrid x:Name="grdUnassignedVolunteers" d:ItemsSource="{d:SampleData ItemCount=5}" Loaded="DataGrid_Loaded"/>
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Button Content="Assign" Name="btnAssignVolunteer" Click="btnAssignVolunteer_Click" Style="{StaticResource CallToAction}"/>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="2">
+                <Button Content="Cancel" Name="btnCancel" Style="{StaticResource WarningButton}" Click="btnCancel_Click"/>
+            </Grid>
+
+
+
+
+
+        </Grid>
+        
+        
+        
+
+    </Grid>
+</Page>

@@ -1,0 +1,55 @@
+﻿<!--
+///<summary>
+/// Creator: Dat Tran
+/// Created: 2025-02-26
+/// Summary: This xaml code displays a data grid with the sample data from the stored procedure in ViewNeedList.sql, along with the buttons
+/// from the UI in the Use case. 
+/// Last updated by: Stan Anderson
+/// Last updated: 2025-04-07
+/// Changes: Updated UI
+///</summary>
+    -->
+<Page x:Class="WpfPresentation.Pages.ViewNeedList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewNeedList">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
+            <Label x:Name="lblNeedlist" Content="Need List" Style="{StaticResource TitleLabel}"/>
+            
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4">
+            <DataGrid x:Name="grdNeedList" Loaded="grdNeedList_Loaded" MouseDoubleClick="grdNeedList_MouseDoubleClick" IsReadOnly="True"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Button x:Name="btnAddItem" Content="Add Item" Style="{StaticResource CallToAction}" Click="btnAddItem_Click" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Button x:Name="btnEditItem" Content="Edit Item" Style="{StaticResource WarningButton}" Click="btnEditItem_Click"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="4">
+            <Button x:Name="btnBack" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+        </Grid>
+        
+    </Grid>
+</Page>

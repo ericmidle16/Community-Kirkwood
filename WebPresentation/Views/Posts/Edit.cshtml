@@ -1,0 +1,66 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Skyann Heintz
+    /// Created: 2025/04/18 
+    /// Summary: View to edit a post 
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-28
+    /// What Was Changed: Styling was added to the page.
+-->
+@model DataDomain.Post
+
+@{
+    ViewData["Title"] = "Edit";
+    int projectID = ViewBag.ProjectID;
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create Location</h2>
+
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" hidden>
+                        <label asp-for="ProjectID" class="control-label"></label>
+                        <input asp-for="ProjectID" class="form-control" value="@projectID" />
+                        <span asp-validation-for="ProjectID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="PostID" class="control-label"></label>
+                        <input asp-for="PostID" class="form-control"/>
+                        <span asp-validation-for="PostID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="UserID" class="control-label" ></label>
+                        <input asp-for="UserID" class="form-control"  />
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="ThreadID" class="control-label" ></label>
+                        <input asp-for="ThreadID" class="form-control"  />
+                        <span asp-validation-for="ThreadID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content" class="control-label"></label>
+                        <input asp-for="Content" class="form-control" />
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="Index" asp-route-id="@ViewBag.ThreadID" asp-route-projectID="@projectID" class="btn btn-secondary ml-3">Back to Fourm Details</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

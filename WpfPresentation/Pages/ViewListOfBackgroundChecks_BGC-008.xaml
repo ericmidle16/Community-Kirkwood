@@ -1,0 +1,56 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-02-20
+    /// Summary:  This is the Page for viewing a list of Background Check records
+    ///     associated with a specific project.
+    /// </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.BGC_008_viewListOfBackgroundChecks"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="BGC_008_viewListOfBackgroundChecks">
+
+    <Grid> <!-- START Outer Page Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="lblProjectName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Project Name" Style="{StaticResource TitleLabel}"/>
+
+        <Label Content="Background Checks" Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelTop}"/>
+
+        <DataGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="grdBackgroundChecks" IsReadOnly="True" AutoGenerateColumns="False"
+          HeadersVisibility="Column" CanUserReorderColumns="False" CanUserResizeRows="False" Loaded="grdBackgroundChecks_Loaded">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Volunteer" Binding="{Binding VolunteerName}"/>
+                <DataGridTextColumn Header="Investigator" Binding="{Binding InvestigatorName}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="3" Grid.Column="1" x:Name="btnEdit" Content="Edit Details" Style="{StaticResource WarningButton}" Click="btnEdit_Click"/>
+        <Button Grid.Row="4" Grid.Column="1" x:Name="btnMembers" Content="Back to Members" Style="{StaticResource BackButton}" Click="btnMembers_Click"/>
+        <Button Grid.Row="3" Grid.Column="2" x:Name="btnApplicationList" Content="View Volunteer Requests" Style="{StaticResource CallToActionSecondary}" Click="btnApplicationList_Click"/>
+        <Button Grid.Row="4" Grid.Column="2" x:Name="btnBack" Content="View Project" Style="{StaticResource CallToActionSecondary}" Click="btnBack_Click"/>
+
+
+    </Grid> <!-- END Outer Page Grid -->
+</Page>

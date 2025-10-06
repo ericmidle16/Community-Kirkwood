@@ -1,0 +1,121 @@
+﻿@* <summary> *@
+@*      Creator: Skyann Heintz *@
+@*      Created:  2025-04-04 *@
+@*      Summary: Shared Layout page. I added a style for our css and also added <br/> so the
+                footer is not right on the views. *@
+
+@*      Updated By: Yousif Omer & Kate Rich *@
+@*      Updated: 2025-04-11 *@
+@*      What Was Changed: Added a navigation link for Event web features. *@
+
+@*      Updated By: Jennifer Nicewanner *@
+@*      Updated: 2025-04-15 *@
+@*      What Was Changed: Added a navigation link for Location & User web features. *@
+
+@*      Last Updated By: Kate Rich *@
+@*      Last Updated: 2025-04-26 *@
+@*      What Was Changed: Updated the Admin navigation link to the user list to call the Index()
+                method of the AdminController, instead of UserController. *@
+
+@*      Last Updated By: Skyann Heintz *@
+@*      Last Updated: 2025-04-28 *@
+@*      What Was Changed: Changed the footer to say the CommUnity instead of WebPresentatoin and the Head Bar as well *@
+
+@*      Last Updated By: Kate Rich *@
+@*      Last Updated: 2025-05-01 *@
+@*      What Was Changed:
+            Updated the text to 2 links in the Admin dropdown:
+                - 'List of Users' to 'User Status'
+                - 'List of Donations' to 'All Donations' *@
+
+@* </summary> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Home</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebPresentation.styles.css" asp-append-version="true" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        th.header {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CommUnity</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Index">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Index">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Location" asp-action="Index">Locations</a>
+                        </li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="ExternalContact" asp-action="Index">Contacts</a>
+						</li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown">Admin</a>
+                            <ul class="dropdown-menu">
+                                <a class="dropdown-item nav-item" asp-area="" asp-controller="Admin" asp-action="Index">User Status</a>
+                                <a class="dropdown-item nav-item" asp-area="" asp-controller="Donations" asp-action="Index">All Donations</a>
+                                <a class="dropdown-item nav-item" asp-area="" asp-controller="Skill" asp-action="Create">New User Skill</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            CommUnity - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+            <br />
+            &copy; 2025 - Kirkwood Software Development Capstone
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

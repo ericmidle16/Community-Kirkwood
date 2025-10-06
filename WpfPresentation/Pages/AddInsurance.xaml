@@ -1,0 +1,40 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Ellie Wacker
+    /// Created:  2025/02/28
+    /// Summary: This is the page for adding insurance
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025/04/08
+    /// </summary>
+-->
+<Page x:Class="WpfPresentation.Pages.AddInsurance"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="700"
+      Title="AddInsurance" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1.25*"/>
+            <RowDefinition Height="1.25*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Insert a Photo of your Insurance" Style="{StaticResource TitleLabel}"/>
+        <Image Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="imgPreview" Width="350" Height="200" Stretch="Uniform" Margin="0,0,0,50"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtImagePath" Width="300" Margin="0,0,0,10" IsReadOnly="True" Visibility="Hidden"/>
+        <Button Grid.Row="2" Grid.Column="2" x:Name="btnImagePick"  Content="Browse for Image" Click="btnImagePick_Click" Style="{StaticResource CallToActionSecondary}"/>
+        <Button Grid.Row="3" Grid.Column="1" x:Name="btnSave"  Content="Save" Click="btnSave_Click" Style="{StaticResource CallToAction}"/>
+        <Button Grid.Row="3" Grid.Column="2" x:Name="btnCancel"  Content="Cancel" Click="btnCancel_Click" Style="{StaticResource WarningButton}"/>
+    </Grid>
+</Page>

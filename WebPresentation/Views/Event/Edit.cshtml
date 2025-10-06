@@ -1,0 +1,141 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Yousif Omer
+    /// Created:  2025-04-04
+    /// Summary:  This is the View for a list of events.
+    ///
+    /// Last Updated By: Kate Rich
+    /// Last Updated: 2025-04-25
+    /// What Was Changed:
+    ///     Updated the ID fields that users should not be allowed to update to be disabled.
+    ///     Added hidden inputs for the disabled values, so that this feature is still functional.
+    ///     Replaced the text input for EventTypeID with a select list of existing Event Types.
+    ///
+    /// Last Updated By: Skyann Heintz
+    /// Last Updated: 2025-04-27
+    /// What Was Changed: Added Styling to page. I also hid all ids from view
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Title was updated from h4 to h2
+    /// </summary>
+-->
+
+@using DataDomain;
+
+@model DataDomain.Event
+
+@{
+    ViewData["Title"] = "Edit";
+
+    IEnumerable<string> eventTypes = ViewBag.EventTypes;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit Event</h2>
+
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="EventID" />
+
+                    <div class="form-group" hidden>
+                        <label class="control-label">Event ID</label>
+                        <input asp-for="EventID" class="form-control" disabled />
+                        <span asp-validation-for="EventID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Event Type</label>
+                        @Html.DropDownListFor(m => m.EventTypeID, new SelectList(eventTypes), new { @class = "form-control" })
+                        <span asp-validation-for="EventTypeID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label class="control-label">Project ID</label>
+                        <input asp-for="ProjectID" class="form-control" disabled />
+                        <span asp-validation-for="ProjectID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Date Created</label>
+                        <input asp-for="DateCreated" class="form-control" disabled />
+                        <span asp-validation-for="DateCreated" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Start Date</label>
+                        <input asp-for="StartDate" class="form-control" type="date" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">End Date</label>
+                        <input asp-for="EndDate" class="form-control" type="date" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Event Name</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label class="control-label">Location ID</label>
+                        <input asp-for="LocationID" class="form-control" disabled />
+                        <span asp-validation-for="LocationID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Volunteers Needed</label>
+                        <input asp-for="VolunteersNeeded" class="form-control" />
+                        <span asp-validation-for="VolunteersNeeded" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label class="control-label">User ID</label>
+                        <input asp-for="UserID" class="form-control" disabled />
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Notes</label>
+                        <input asp-for="Notes" class="form-control" />
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                        </label>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="Index" class="btn btn-secondary ml-3">Back to Events</a>
+                    </div>
+
+                    <input type="hidden" name="EventID" value="@Model.EventID" />
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID" />
+                    <input type="hidden" name="DateCreated" value="@Model.DateCreated" />
+                    <input type="hidden" name="LocationID" value="@Model.LocationID" />
+                    <input type="hidden" name="UserID" value="@Model.UserID" />
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,221 @@
+﻿<!--
+///<summary>
+/// Creator: Syler Bushlack
+/// Created: 2025/04/05
+/// Summary: The index view for seeing all projects
+
+/// Last Updated By: Ellie Wacker
+/// Last Updated: 2025/04/22
+/// What was Changed: I added a view bag for if leave project is a success
+
+/// Last Updated By: Skyann Heintz
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added.
+
+/// Last Updated By: Syler Bushlack
+/// Last Updated: 2025-05-01
+/// What Was Changed: Made the donate button hidden for projects that don't accept donations
+
+/// Last Updated By: Dat Tran
+/// Last Updated: 2025-05-01
+/// What Was Changed: Commented out the delete button since no functionality for it exists. 
+/// </summary>
+-->
+@model IEnumerable<DataDomain.ProjectVM>
+
+@{
+    ViewData["Title"] = "List of Projects";
+    var activeUserID = ViewBag.ActiveUserID;
+}
+@* @if (TempData["SuccessMessage"] != null) *@
+@* { *@
+@*     <div class="alert alert-success"> *@
+@*         @TempData["SuccessMessage"] *@
+@*     </div> *@
+@* } *@
+@*
+    Creator: Dat Tran
+    Created: 2025-04-2
+    Summary: Sweet Alerts for Project CRUD functionality. Commented out Christi's Bootstrap alert. 
+    Delete Project Does not work so no Sweet Alert implemenation for that. 
+    Last updated by:
+    Last updated: 
+    Changes: 
+*@
+@if (TempData["UpdateSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertUpdateProjectShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["UpdateSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertUpdateProjectShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("UpdateSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertUpdateProjectShown');
+    </script>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertCreateProjectShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["SuccessMessage"]'
+                });
+                sessionStorage.setItem('sweetAlertCreateProjectShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("SuccessMessage");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertCreateProjectShown');
+    </script>
+}
+
+<h1 class="text-center">All Projects</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success btn">Create New Project</a>
+    <a asp-action="IndexStartedProjects" asp-route-id="@activeUserID" class="btn btn-info btn">My Projects</a>
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="header">
+                @Html.ActionLink("Project Starter", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th class="header">
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Name), "Index", new { sortOrder = ViewBag.ProjectNameParm })
+            </th>
+            <th class="header">
+                @Html.ActionLink("Project Type", "Index", new { sortOrder = ViewBag.ProjectType })
+            </th>
+            <th class="header">
+                @Html.ActionLink("Location", "Index", new { sortOrder = ViewBag.Location })
+            </th>
+            @* <th> *@
+            @*     @Html.ActionLink(@Html.DisplayNameFor(model => model.Address), "Index", new { sortOrder = ViewBag.Address }) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.ActionLink(@Html.DisplayNameFor(model => model.Zip), "Index", new { sortOrder = ViewBag.Zip }) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.ActionLink(@Html.DisplayNameFor(model => model.City), "Index", new { sortOrder = ViewBag.City }) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.ActionLink(@Html.DisplayNameFor(model => model.State), "Index", new { sortOrder = ViewBag.State }) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.FamilyName) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.ProjectID) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.LocationID) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.UserID) *@
+            @* </th> *@
+            <th class="header">
+                @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+            <th class="header">
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Status), "Index", new { sortOrder = ViewBag.Status })
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectTypeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationName)
+                </td>
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.Address) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.Zip) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.City) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.State) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.FamilyName) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.ProjectID) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.LocationID) *@
+                @* </td> *@
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.UserID) *@
+                @* </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <a href="@Url.Action("Edit", new { id = item.ProjectID })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Details", new { id = item.ProjectID })" class="btn btn-primary btn-sm">Details</a>
+                        @* Hardcoded the userID value *@
+                        @if(item.AcceptsDonations){
+                            <a href="@Url.Action("Create", "Donations", new { userID = 100005, projectID = item.ProjectID })" class="btn btn-success btn-sm">Donate</a>
+                        }
+                        @* <a href="@Url.Action("Delete", new { id = item.ProjectID })" class="btn btn-danger btn-sm">Delete</a> *@
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

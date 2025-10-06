@@ -1,0 +1,197 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-02-05
+    /// Summary:  This is the Main Window that will be used to load each Page.
+    ///
+    /// Last Updated By: Stan Anderson
+    /// Last Updated: 2025/04/08
+    /// What was Changed: Updated the main window layout
+    /// </summary>
+-->
+<Window x:Class="WpfPresentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPresentation"
+        mc:Ignorable="d"
+        Icon="/Images/community_ver_2.png"
+        Title="CommUnity" Height="650" Width="850" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="677*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Padding="15 0 15 0" Grid.ColumnSpan="4">
+            <!-- START Menu Bar -->
+            <MenuItem Header="File" x:Name="mnuFile">
+                <MenuItem Header="Exit" x:Name="mnuExit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit" x:Name="mnuEdit">
+                <MenuItem Header="Preferences" x:Name="mnuPreferences"></MenuItem>
+                <MenuItem Header="Schedule Notification" x:Name="mnuScheduleNotification" Click="mnuScheduleNotification_Click" Visibility="Collapsed"/>
+            </MenuItem>
+            <MenuItem Header="Help" x:Name="mnuHelp">
+                <MenuItem Header="Change Password" x:Name="mnuUpdatePassword" Click="mnuUpdatePassword_Click"></MenuItem>
+                <MenuItem Header="About" x:Name="mnuAbout"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <!-- END Menu Bar -->
+
+        <!-- START Main Navigation -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="4" Background="LightSeaGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" x:Name="btnHome" Margin="10" Content="CommUnity" FontWeight="Bold" FontSize="16" Style="{StaticResource WhiteBlack}" Click="btnHome_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="White" Offset="0.0" />
+                        <GradientStop Color="SeaGreen" Offset="0.25" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            
+
+            <Grid Grid.Column="3" Margin="05 10">
+                <!-- START Grid for Log In & Create Account -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" x:Name="btnLogInOut" Content="Log In" Margin="0 0 0 2" Style="{StaticResource SideButton}" FontWeight="Medium" Click="btnLogInOut_Click" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="White" Offset="0.0" />
+                            <GradientStop Color="SeaGreen" Offset="0.25" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+                <Button Grid.Row="1" x:Name="btnCreateAccount" Content="Sign Up" Margin="0 2 0 0" FontWeight="Medium" Style="{StaticResource CallToAction}"
+                   Click="btnCreateAccount_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="White" Offset="0.0" />
+                            <GradientStop Color="DarkSeaGreen" Offset="0.25" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+                <Button Grid.Row="1" x:Name="btnInbox" Margin="0,2,0,0" Content="Inbox" FontWeight="Medium" FontSize="14" Foreground="White" Click="btnInbox_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="White" Offset="0.0" />
+                            <GradientStop Color="DarkSeaGreen" Offset="0.25" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+
+            </Grid>
+            <!-- END Grid for Log In & Create Account -->
+
+            <Button Grid.Column="4" x:Name="btnProfile" Margin="10" FontWeight="Bold" FontSize="14" Click="btnProfile_Click" Foreground="Black" Style="{StaticResource WhiteBlack}">
+                <Image x:Name="imgProfile" Source="/Images/defaultPFP.jpg"/>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="White" Offset="0.0" />
+                        <GradientStop Color="White" Offset="0.25" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        
+        
+        
+        
+        
+        </Grid>
+        <!-- END Main Navigation -->
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="0" Grid.RowSpan="8" Background="SeaGreen"/>
+
+
+                <Button Grid.Row="0" x:Name="btnProjectBar" Content="Projects" Style="{StaticResource SideButton}" Click="btnProjectBar_Click" />
+                <Button Grid.Row="1" x:Name="btnLocationBar" Content="Locations" Style="{StaticResource SideButton}" Click="btnLocationBar_Click" />
+                <Button Grid.Row="2" x:Name="btnEventBar" Content="Events" Style="{StaticResource SideButton}" Click="btnEventBar_Click" />
+                <Button Grid.Row="3" x:Name="btnExternalContacts" Content="Contacts" Style="{StaticResource SideButton}" Click="btnExternalContacts_Click"/>
+                <Button Grid.Row="4" x:Name="btnCalendarBar" Content="Calendar" Style="{StaticResource SideButton}" Click="btnCalendarBar_Click" />
+                <Button Grid.Row="5" x:Name="btnUserBar" Content="Users" Style="{StaticResource SideButton}" Click="btnUserBar_Click" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" x:Name="mainFrame" Height="450" Width="700" NavigationUIVisibility="Hidden"/>
+            <!-- <Button Grid.Row="1" Margin="650 5 10 5" Content="Back" Click="btnBack_Click"/> -->
+        </Grid>
+
+        <!-- START Frame for Loading Pages -->
+        <!-- END Frame for Loading Pages -->
+
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="4" Margin="0 0 0 0">
+            <!-- START Status Bar -->
+            <StatusBarItem x:Name="statMessage" Content="Welcome! Log in to your account to start volunteering on community projects!" Padding="15 0 15 0" />
+        </StatusBar>
+        <!-- END Status Bar -->
+    </Grid>
+</Window>

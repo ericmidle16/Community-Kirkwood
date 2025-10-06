@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*
+    Creator: Dat Tran
+    Created: 2025-04-27
+    Summary: Sweet Alert implementation for adding a skill. 
+    Last Updated By:
+    Last Updated: 
+    What was changed:
+
+*@
+@if (TempData["AddSkill"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertAddSkillShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["AddSkill"]'
+                });
+                sessionStorage.setItem('sweetAlertAddSkillShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("AddSkill");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddSkillShown');
+    </script>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to CommUnity</h1>
+    <img src="~/Images/community1.jpg" />
+
+    <div class="text-center mb-5">
+        <p class="lead px-3">
+            At CommUnity, our mission is to ignite the spirit of community collaboration
+            through an open-source platform that empowers individuals to initiate,
+            volunteer for, and complete impactful projects within their local neighborhoods.
+            We believe that meaningful change starts at the grassroots level, and by connecting
+            passionate community members with opportunities to contribute,
+            we can collectively foster a stronger, more vibrant society.
+            Whether it's organizing neighborhood cleanups, supporting
+            local charities, or building shared community spaces,
+            CommUnity is dedicated to providing the tools and connections
+            needed to turn ideas into action. Join us in making a difference, one project at a time.
+        </p>
+    </div>
+
+    <div class="row justify-content-center text-center">
+        <div class="col-md-3 mb-3">
+            <a class="btn btn-primary btn-lg w-100" asp-controller="Project" asp-action="Create">Start a Project</a>
+        </div>
+        <div class="col-md-3 mb-3">
+            <a class="btn btn-secondary btn-lg w-100" asp-controller="Project" asp-action="Index">View Projects</a>
+        </div>
+        <div class="col-md-3 mb-3">
+            @* need to be fixed *@
+            <a class="btn btn-success btn-lg w-100" asp-controller="Project" asp-action="Index">Donate</a>
+        </div>
+        <div class="col-md-3 mb-3">
+            <a class="btn btn-info btn-lg w-100" asp-controller="Event" asp-action="">View Events</a>
+        </div>
+    </div>
+</div>

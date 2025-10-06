@@ -1,0 +1,97 @@
+﻿<Page x:Class="WpfPresentation.Pages.UpdateEvent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="UpdateEvent" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Style="{StaticResource TitleLabel}">Update Event</Label>
+
+
+        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelLeft}">Event ID</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="txtEventID" ToolTip="This item is assigned by the system."/>
+
+
+        <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource LabelLeft}">EventTypeID</Label>
+        <TextBox Grid.Column="3" Grid.Row="1"  Name="txtEventTypeID" ToolTip="This item is assigned by the system."/>
+
+
+        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelLeft}">Project ID</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Name="txtProjectID" ToolTip="This item is assigned by the system."/>
+
+
+        <Label Grid.Row="2" Grid.Column="2" Style="{StaticResource LabelLeft}">Date Created</Label>
+        <DatePicker Grid.Column="3" Grid.Row="2" x:Name="dpDateCreated"/>
+
+
+        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelLeft}">Start Date</Label>
+        <DatePicker Grid.Column="1" Grid.Row="3" x:Name="dpStartDate"/>
+
+
+        <Label Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelLeft}">End Date</Label>
+        <DatePicker Grid.Column="3" Grid.Row="3" x:Name="dpEndDate"/>
+
+
+        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelLeft}">Location ID</Label>
+        <TextBox Grid.Column="1" Grid.Row="4" Name="txtLocationID" ToolTip="This item is assigned by the system."/>
+
+
+        <Label Grid.Row="4" Grid.Column="2" Style="{StaticResource LabelLeft}"> Volunteers Needed</Label>
+        <TextBox Grid.Column="3" Grid.Row="4" Name="txtVolunteersNeeded"/>
+
+        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelLeft}">User ID</Label>
+        <TextBox Grid.Column="1" Grid.Row="5" Name="txtUserID" ToolTip="This item is assigned by the system."/>
+
+        <Label Grid.Row="5" Grid.Column="2" Style="{StaticResource LabelLeft}" >Name</Label>
+        <TextBox Grid.Column="3" Grid.Row="5" Name="txtName"/>
+
+
+        <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelLeft}"> Notes</Label>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" Name="txtNotes"/>
+
+        <Label Grid.Row="7" Grid.Column="2" Style="{StaticResource LabelLeft}">Active</Label>
+        <TextBox Grid.Column="3" Grid.Row="7" Name="txtActive"/>
+
+        <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelTop}">Description</Label>
+        <TextBox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="8" Name="txtDescription" Style="{StaticResource Description}"/>
+
+     
+
+        <!--<Button Width="100" FontSize="12" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="3" Name="btnFindEvent">
+
+            Find Event
+        </Button>-->
+
+        <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"  Name="btnUpdateEvent" Style="{StaticResource CallToAction}" Click="btnUpdateEvent_Click">
+            Update Event
+        </Button>
+
+        <Button Grid.Row="10" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource WarningButton}" Name="Cams" Click="Cams_Click">
+            Cancel
+        </Button>
+
+    </Grid>
+</Page>

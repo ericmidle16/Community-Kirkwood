@@ -1,0 +1,222 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Nik Bell
+    /// Created: 2025-04-24
+    /// Summary: View to see Forum Details
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page.
+    ///
+    /// Updated By: Dat Tran
+    /// Updated: 2025-04-30
+    /// What was changed: Added Sweet Alerts for pinning and unpinning a post.
+    /// Also modified the Delete button to work with the modified Delete method in PostsController.
+    
+-->
+
+@model IEnumerable<DataDomain.PostVM>
+
+@{
+    ViewData["Title"] = "Index";
+    int threadID = ViewBag.threadId;
+    int projectID = ViewBag.projectID;
+}
+
+<h1 class="text-center">Forum Details</h1>
+@if(TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertUpdatePostShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["SuccessMessage"]'
+                });
+                sessionStorage.setItem('sweetAlertUpdatePostShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("SuccessMessage");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertUpdatePostShown');
+    </script>
+}
+
+@if(TempData["AddSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertAddPostShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["AddSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertAddPostShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("AddSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertAddPostShown');
+    </script>
+}
+@if(TempData["DeleteSuccess"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertDeletePostShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["DeleteSuccess"]'
+                });
+                sessionStorage.setItem('sweetAlertDeletePostShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("DeleteSuccess");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertDeletePostShown');
+    </script>
+}
+@if (TempData["Pinned"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertPinnedShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["Pinned"]'
+                });
+                sessionStorage.setItem('sweetAlertPinnedShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("Pinned");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertPinnedShown');
+    </script>
+}
+@if(TempData["Unpinned"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!sessionStorage.getItem('sweetAlertUnpinnedShown')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: '@TempData["Unpinned"]'
+                });
+                sessionStorage.setItem('sweetAlertUnpinnedShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("Unpinned");
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertUnpinnedShown');
+    </script>
+}
+<p>
+    @Html.ActionLink("Create New Post", "Create", new { id = ViewBag.threadId, projectID = ViewBag.projectID }
+            , new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="header">
+                Given Name
+            </th>
+            <th class="header">
+                Family Name
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Reply)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Edited)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Pinned)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.DatePosted)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GivenName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reply)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edited)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pinned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePosted)
+            </td>
+            <td>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    @if (item.Pinned)
+                    {
+                        @Html.ActionLink("Unpin", "Pin", new { postID = item.PostID, threadID = threadID, projectID = projectID }, new { @class = "btn btn-warning btn-sm" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Pin", "Pin", new { postID = item.PostID, threadID = threadID, projectID = projectID }, new { @class = "btn btn-warning btn-sm" })
+                    } 
+                        <a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.PostID" asp-route-projectID="@ViewBag.projectID">Delete</a>
+                        <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.PostID" asp-route-projectID="@ViewBag.projectID">Edit</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

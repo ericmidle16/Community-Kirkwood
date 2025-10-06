@@ -1,0 +1,143 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Jackson Manternach
+    /// Created: 2025-04-24
+    /// Summary: View to create event
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-28
+    /// What Was Changed: Styling was added to the page.
+-->
+
+@model DataDomain.Event
+
+@{
+    ViewData["Title"] = "Create Event";
+    var projectID = ViewBag.ProjectID;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Create Event</h2>
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        <strong>@TempData["ErrorMessage"]</strong>
+                    </div>
+                }
+
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="ProjectID" value="@projectID" />
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Event Name:</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="EventTypeID" class="control-label">Event Type:</label>
+                        <select asp-for="EventTypeID" class="form-control">
+                            <option value="">-- Select Event Type --</option>
+                            @foreach (var eventType in ViewBag.EventTypes)
+                            {
+                                <option value="@eventType.EventTypeID">@eventType.EventTypeID</option>
+                            }
+                        </select>
+                        <span asp-validation-for="EventTypeID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LocationID" class="control-label">Location:</label>
+                        <select asp-for="LocationID" class="form-control">
+                            <option value="0">-- Select Location --</option>
+                            @foreach (var location in ViewBag.Locations)
+                            {
+                                <option value="@location.LocationID">@location.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="LocationID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="VolunteersNeeded" class="control-label">Volunteers Needed:</label>
+                        <input asp-for="VolunteersNeeded" type="number" class="form-control" min="0" />
+                        <span asp-validation-for="VolunteersNeeded" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Event Start Date:</label>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startTime" class="control-label">Start Time:</label>
+                        <div class="d-flex">
+                            <select id="startTime" name="startTime" class="form-control">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <select id="startAMPM" name="startAMPM" class="form-control">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label">Event End Date:</label>
+                        <input asp-for="EndDate" type="date" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endTime" class="control-label">End Time:</label>
+                        <div class="d-flex">
+                            <select id="endTime" name="endTime" class="form-control">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <select id="endAMPM" name="endAMPM" class="form-control">
+                                <option value="AM">AM</option>
+                                <option value="PM" selected>PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label">Description:</label>
+                        <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label">Notes:</label>
+                        <textarea asp-for="Notes" rows="3" class="form-control"></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" asp-route-id="@projectID" class="btn btn-secondary ml-3">Back to Events</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,77 @@
+﻿<!--
+    <summary>
+    Creator:  Syler Bushlack
+    Created:  2025/02/14
+    Summary:  Xaml for the list of all rejected volunteer requests to join a project
+    Last Updated By: Stan Anderson
+    Last Updated: 2025/04/07
+    What was Changed: UI updates and connections	
+    </summary>
+-->
+    <Page x:Class="WpfPresentation.Pages.ViewRejectedVolunteerOffers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="ViewRejectedVolunteerOffers" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <TextBlock x:Name="txtNoRequests" Grid.Row="1" Grid.Column="1" Visibility="Hidden" Text="There are no Volunteer Requests" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <Label Grid.Row="0" Grid.Column="1" Content="Rejected Volunteer Requests" Style="{StaticResource TitleLabel}"/>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" CanContentScroll="True" >
+
+            <ListView x:Name="lvVolunteerStatus" ItemsSource="{Binding _volunteerStatuses}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="Black" Padding="5" Margin="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="Placeholder.png" Width="81" Height="72" Grid.Column="0" />
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <Label Content="{Binding Name}" Style="{StaticResource LabelTop}"/>
+                                    <Button x:Name="btnAccept" Content="Accept" Style="{StaticResource CallToAction}" Click="btnAccept_Click"/>
+                                </StackPanel>
+
+                                <Button x:Name="btnInfo" Content="More Info" Width="80" Height="30" Grid.Column="2" Style="{StaticResource CallToActionSecondary}" Click="btnInfo_Click"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnViewAll" Grid.Column="0" Content="View All Volunteers" Style="{StaticResource CallToActionSecondary}" Click="btnViewAll_Click"/>
+            <Button x:Name="btnViewRequests" Grid.Column="1" Content="View All Requests" Style="{StaticResource CallToActionSecondary}" Click="btnViewRequests_Click"/>
+            <Button x:Name="btnBack" Grid.Column="2" Content="Back" Style="{StaticResource BackButton}" Click="btnBack_Click"/>
+        </Grid>
+
+    </Grid>
+</Page>

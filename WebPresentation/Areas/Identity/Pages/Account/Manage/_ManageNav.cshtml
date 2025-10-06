@@ -1,0 +1,44 @@
+﻿@* <summary> *@
+@*     Creator: Jacob McPherson *@
+@*     Created: 2025-04-24 *@
+@*     Summary: Nav for Identity Manage
+*@
+@*     Last Updated By: Josh Nicholson*@
+@*     Last Updated:  2025-05-01*@
+@*     What Was Changed: Added User Profile information*@
+@* </summary> *@
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject LogicLayer.UserManager LogicUserManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var user = await UserManager.GetUserAsync(User);
+    var userId = LogicUserManager.GetUserByEmail(user.Email).UserID;
+}
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+    }
+    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+</ul>
+
+<br />
+<ul class="nav nav-pills flex-column">
+    @Html.ActionLink("Your Skills", "UpdateSkills", "Skill", new { userID = userId }, new { @class = "nav-link" })
+    @Html.ActionLink("Your Vehicles", "Index", "Vehicle", new { id = userId }, new { @class = "nav-link" })
+    @Html.ActionLink("Your Projects", "IndexStartedProjects", "Project", new { id = userId }, new { @class = "nav-link" })
+    @Html.ActionLink("Your Donations", "ViewDonationHistory", "Donations", new { id = userId }, new { @class = "nav-link" })
+    @Html.ActionLink("Your Availablility", "Availability", "Availability", new { id = userId }, new { @class = "nav-link" })
+    @Html.ActionLink("Your Notifications", "Index", "Notification", null, new { @class = "nav-link" })
+    @Html.ActionLink("Your Calendar", "Index", "Calendar", null, new { @class = "nav-link" })
+</ul>
+
+<br />
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link" id="deactivate" asp-controller="User" asp-action="Delete">Deactivate</a></li>
+</ul>

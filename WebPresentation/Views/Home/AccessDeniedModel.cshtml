@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Access Denied";
+}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg" style="max-width: 400px;">
+        <div class="card-body text-center">
+            <h2 class="card-title text-danger mb-3">Access Denied</h2>
+            <p class="card-text mb-4">
+                You don’t have the required role to view this page.<br />
+                Please log in with an authorized account.
+            </p>
+            <a class="btn btn-primary btn-block"
+               asp-area="Identity"
+               asp-page="/Account/Login">
+                Login
+            </a>
+        </div>
+    </div>
+</div>

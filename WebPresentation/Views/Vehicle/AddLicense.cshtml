@@ -1,0 +1,70 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Ellie Wacker
+    /// Created: 2025-04-03
+    /// Summary: View for adding a driver license image
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Updated button from "Save" to "Add" to match the other button. 
+            Updated "Back to Profile" to "Back to Vehicles"
+-->
+@using DataDomain
+@model Vehicle
+
+@{
+    ViewData["Title"] = "Add License";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Insert a Photo of Your License</h2>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+
+                <form method="post" action="@Url.Action("AddLicense", "Vehicle")" enctype="multipart/form-data">
+                    
+                    @Html.AntiForgeryToken()
+
+                    <div>
+                        <img id="imgPreview" width="350" height="auto" style="display:none; width: 10em; margin-top: 20px;" />
+                    </div>
+                    @* shows the choose image input *@
+                    <div class="form-group" style="margin-top: 1em">
+                        <input type="file" name="imageFile" id="imageFile" class="form-control" onchange="previewImage(event)">
+                    </div>
+
+                    <input type="hidden" name="userID" value="@ViewBag.UserID" />
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="btn btn-success">Add</button>
+                        <a href="/Vehicle/Index?id=@ViewBag.UserID" class="btn btn-secondary">Back to Vehicles</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // creates a function to preview the selected image
+        function previewImage(event) {
+            var reader = new FileReader(); // creates a file reader object
+            reader.onload = function () { // an event handler that excecutes when the file is read
+                var imgPreview = document.getElementById('imgPreview'); // gets the image element
+                imgPreview.src = reader.result; // gives the image the desired src
+                imgPreview.style.display = 'block'; // makes the image visible
+            };
+            reader.readAsDataURL(event.target.files[0]); // reads the first file from input
+        }
+    </script>
+}

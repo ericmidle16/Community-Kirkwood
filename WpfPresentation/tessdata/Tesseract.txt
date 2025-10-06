@@ -1,0 +1,1 @@
+This folder contains the tessdata that allows tesseract to run.

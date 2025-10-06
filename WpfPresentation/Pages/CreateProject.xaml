@@ -1,0 +1,129 @@
+﻿<!--  
+<summary>
+Creator:  Josh Nicholson
+Created:  2025/02/07
+Summary:  Xaml code to create the createProject UI structure
+    
+Last Updated By: Stan Anderson
+Last Updated: 2025/04/10
+</summary>
+-->
+<Page x:Class="WpfPresentation.Pages.createProject"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfPresentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="createProject">
+    <Grid Loaded="Grid_Loaded">
+        <!-- Outer Page Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!-- Inner Page Grid -->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Label x:Name="lblProjectID" Content="Project ID:" Opacity="0"/>
+            </Grid>
+            <Label x:Name="lblProjectName" Grid.Row="0" Style="{StaticResource LabelTop}" Content="Project Name"/>
+            <Grid Grid.Row="1">
+                <TextBox x:Name="txtProjectName" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBottom}" />
+            </Grid>
+
+            <Label x:Name="lblLocationName" Grid.Row="2" Style="{StaticResource LabelTop}" Content="Project Location"/>
+            <Grid Grid.Row="3">
+                <ComboBox x:Name="cmbLocationName" Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboUnder}"/>
+            </Grid>
+
+            <Label x:Name="lblProjectType" Grid.Row="4" Content="Project Type" Style="{StaticResource LabelTop}"/>
+            <Grid Grid.Row="5">
+                <ComboBox x:Name="cmbProjectType" Grid.Row="0" Grid.Column="1" AllowDrop="True" Style="{StaticResource ComboUnder}"/>
+            </Grid>
+
+            <Label x:Name="lblProjectStatus" Grid.Row="6" Content="Project Status" Style="{StaticResource LabelTop}"/>
+            <Grid Grid.Row="7">
+                <ComboBox x:Name="cmbProjectStatus" Grid.Row="0" Grid.Column="1" AllowDrop="True" Style="{StaticResource ComboUnder}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lblProjectStart" Grid.Row="0" Style="{StaticResource LabelTop}" Content="Project Start Date"/>
+            <Grid Grid.Row="1">
+                <DatePicker x:Name="dtpkProjectStart" Grid.Row="0" Grid.Column="1" Style="{StaticResource DateUnder}"/>
+            </Grid>
+
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblProjectDesc" Grid.Column="0" Style="{StaticResource LabelTop}" Content="Project Description"/>
+                <Label x:Name="lblTextBoxCharDisplay" Grid.Column="1" Style="{StaticResource SmallTitleLabel}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0"/>
+            </Grid>
+            
+            <Grid Grid.Row="3" Grid.RowSpan="2">
+                <TextBox x:Name="txtProjectDesc" Grid.Row="0" Grid.Column="1" Style="{StaticResource Description}" TextChanged="txtProjectDesc_TextChanged"/>
+            </Grid>
+            
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" x:Name="lblTaskActive" VerticalContentAlignment="Center" Content="Does this project accept donations?"/>
+                <CheckBox x:Name="chbProjectDonation" Grid.Column="2" VerticalContentAlignment="Center" Click="chbProjectDonation_Click" />
+            </Grid>
+
+            <Label x:Name="lblPaypalAccount" Grid.Row="6" Content="Paypal Account" Style="{StaticResource LabelTop}"/>
+            <Grid Grid.Row="7">
+                <TextBox x:Name="txtPaypalAccount" Grid.Row="0" Grid.Column="1" IsEnabled="False" Style="{StaticResource TextBottom}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Button x:Name="btnProjectSave" Content="Save" Style="{StaticResource CallToAction}" Click="btnProjectSave_Click"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Button x:Name="btnProjectCancel" Content="Cancel" Style="{StaticResource WarningButton}" Click="btnProjectCancel_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

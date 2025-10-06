@@ -1,0 +1,19 @@
+﻿@*
+    Creator: Dat Tran
+    Created: 2025-04-28
+    Summary: If a page doesn't exist when clicking something or through the address bar, it goes to this page. 
+*@
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "404 - Page Not Found";
+}
+
+<div class="text-center mt-5">
+    <h1>404 - Page Not Found</h1>
+    <h1>The page you’re looking for doesn’t exist.</h1>
+    <img src="@Url.Content("~/Images/212422.gif")" alt="404 error" style="max-width: 80%; height: auto;" />
+    <br />
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+

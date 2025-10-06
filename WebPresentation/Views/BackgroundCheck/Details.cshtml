@@ -1,0 +1,58 @@
+﻿<!--
+    /// <summary>
+    /// Creator:  Kate Rich
+    /// Created:  2025-03-27
+    /// Summary:  This is the View for details about a single Background Check record.
+    /// Last Updated By: Skyann Heintz
+    /// Last Updated: 2025-04-30
+    /// What Was Changed: Styling has been added to the page.
+    /// </summary>
+-->
+
+@model DataDomain.BackgroundCheckVM
+
+@{
+    ViewData["Title"] = "Details";
+
+    var m = Model;
+}
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h2 class="m-0">Background Check for @m.ProjectName</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.InvestigatorName)
+                </dt> 
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.InvestigatorName)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerName)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerName)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <a href="@Url.Action("Edit", new { id = Model.BackgroundCheckID })" class="btn btn-warning">Edit</a>
+    <a href="@Url.Action("Index", new { id = Model.ProjectID })" class="btn btn-secondary">Back to Background Checks</a>
+</div>

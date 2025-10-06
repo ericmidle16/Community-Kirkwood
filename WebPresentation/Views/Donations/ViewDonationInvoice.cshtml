@@ -1,0 +1,77 @@
+﻿<!--
+///<summary>
+/// Creator: Christivie Mauwa
+/// Created: 2025-04-24
+/// Summary: View to see Donation invoice
+
+/// Last Updated By: Skyann Heintz
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added. Hid the donatation id and project ID
+///
+/// Updated By: Skyann Heintz
+/// Updated: 2025-04-30
+/// What Was Changed: Title was updated from h4 to h2. Updated buttons to be small
+/// </summary>
+-->
+@model DataDomain.DonationVM
+
+@{
+    ViewData["Title"] = "View Donation Invoice";
+}
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h2 class="m-0">All Donation Invoices</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold" hidden>
+                    Donation ID :
+                </dt>
+                <dd class="col-sm-9" hidden>
+                    @Html.DisplayFor(model => model.DonationID)
+                </dd>
+                <dt></dt>
+                <dt class="col-sm-3 font-weight-bold">
+                    Donation Date
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.DonationDate)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Amount)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Amount)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold" hidden>
+                    @Html.DisplayNameFor(model => model.ProjectID)
+                </dt>
+                <dd class="col-sm-9" hidden>
+                    @Html.DisplayFor(model => model.ProjectID)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-3 font-weight-bold">
+                    Location Name
+                </dt>
+               <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.LocationName)
+               </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <a href="@Url.Action("Details", new { id = Model.DonationID })" class="btn btn-info">Details</a>
+    <a href="@Url.Action("ViewDonationHistory", new { id = Model.UserID })" class="btn btn-secondary">Back to Donation History</a>
+
+    @* <a asp-action="Edit" asp-route-id="@Model?.DonationID">Edit</a> | *@
+    @* @Html.ActionLink("History", "ViewDonationHistory", new { id = Model.DonationID })|  *@
+    @* <a asp-action="Index">Back to List</a> *@
+</div>

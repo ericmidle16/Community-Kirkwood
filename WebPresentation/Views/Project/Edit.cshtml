@@ -1,0 +1,96 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Shristivie Mauwa
+    /// Created: 2025-04-24
+    /// Summary: Created the edit view
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-27
+    /// What Was Changed: Styling was added to the page.
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Title was updated from h4 to h2
+-->
+@model DataDomain.ProjectVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit Project</h2>
+
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ProjectID" />
+
+                    <div class="form-group">
+                        <label class="control-label">Project Name</label>
+                        <input asp-for="Name" readonly="readonly" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Project Type</label>
+                        <input asp-for="ProjectTypeID" readonly="readonly" class="form-control" />
+                        <span asp-validation-for="ProjectTypeID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Status</label>
+                        <select asp-for="Status" class="form-control" asp-items="ViewBag.StatusList">
+                            <option value="">-- Select Status --</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Full Name</label>
+                        <input class="form-control" value="@($"{Model.GivenName} {Model.FamilyName}")" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Location</label>
+                        <select asp-for="LocationID" class="form-control" asp-items="ViewBag.Locations"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Start Date</label>
+                        <input asp-for="StartDate" readonly="readonly" class="form-control" type="date" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" value="Edit" class="btn btn-warning" />
+                        <a asp-action="Index" class="btn btn-secondary ml-3">Back to Projects</a>
+                    </div>
+
+                    <input type="hidden" name="GivenName" value="@Model.GivenName" />
+                    <input type="hidden" name="FamilyName" value="@Model.FamilyName" />
+                    <input type="hidden" name="State" value="@Model.State" />
+                    <input type="hidden" name="Zip" value="@Model.Zip" />
+                    <input type="hidden" name="City" value="@Model.City" />
+                    <input type="hidden" name="LocationName" value="@Model.LocationName" />
+                    <input type="hidden" name="Address" value="@Model.Address" />
+                    <input type="hidden" name="PayPalAccount" value="@Model.PayPalAccount" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

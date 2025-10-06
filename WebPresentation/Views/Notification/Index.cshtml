@@ -1,0 +1,136 @@
+﻿<!--
+    /// <summary>
+    /// Creator: Brodie
+    /// Created: 2025-04-24
+    /// Summary: View notifcations
+    ///
+    /// Updated By: Skyann Heintz
+    /// Updated: 2025-04-30
+    /// What Was Changed: Styling was added to the view
+-->
+
+@model List<DataDomain.NotificationVM>
+
+@{
+    Layout = "_Layout";  // or whatever your site layout is
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Notifcations</h2>
+
+                    <div class="form-inline mb-3">
+                        <input id="txtSearch" class="form-control mr-2" placeholder="Search…" />
+                        
+                    </div>
+                    <div class="text-center">
+                    <button id="btnSearch" class="btn btn-success mr-2">Search</button>
+                    @* <button id="btnFilter" class="btn btn-secondary">Show Unviewed Only</button> *@
+                    </div>
+                    <div id="notificationsContainer">
+                        @foreach (var n in Model)
+                        {
+                            <div class="card mb-3"
+                                 data-id="@n.NotificationID"
+                                 data-name="@n.Name.ToLower()"
+                                 data-content="@n.Content.ToLower()"
+                                 data-isviewed="@n.IsViewed.ToString().ToLower()">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <div>
+                                        @if (n.Important)
+                                        {
+                                            <span class="text-danger font-weight-bold mr-2">Important</span>
+                                        }
+                                        <strong>@n.FullSenderName</strong>
+                                        <span class="ml-2">@n.Name</span>
+                                    </div>
+                                    <div>
+                                        @if (n.IsViewed)
+                                        {
+                                            <span class="text-muted mr-2">Viewed</span>
+                                        }
+                                        <small class="text-muted">@n.DisplayDateString</small>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    <p class="card-text">@n.Content</p>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <button class="btn btn-success btn-viewed" @(n.IsViewed ? "disabled" : "")>
+                                        @(n.IsViewed ? "Viewed" : "Mark Viewed")
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                <!-- No messages display -->
+                <div id="emptyMessage" class="text-center text-muted my-4" style="display:none;">
+                    All Caught up!
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+           $(function() {
+            // toggles the empty-message vs visible cards
+            function updateEmpty() {
+                var anyVisible = $('#notificationsContainer .card:visible').length > 0;
+                $('#emptyMessage').toggle(!anyVisible);
+            }
+
+            // initial check
+            updateEmpty();
+
+            // Mark as viewed
+            $('.btn-viewed').click(function() {
+                var btn  = $(this);
+                var card = btn.closest('.card');
+                var id   = card.data('id');
+
+                $.post('@Url.Action("MarkAsViewed")', { id: id })
+                 .done(function(res) {
+                    if (res.success) {
+                        btn.text('Viewed').prop('disabled', true);
+
+                        // add badge if missing
+                        if (!card.find('.viewed-badge').length) {
+                            card.find('.card-header > div').last()
+                                .prepend('<span class="text-muted mr-2 viewed-badge">Viewed</span>');
+                        }
+
+                        card.attr('data-isviewed', 'true');
+                        updateEmpty();
+                    }
+                 });
+            });
+
+            // Search
+            $('#btnSearch').click(function() {
+                var kw = $('#txtSearch').val().toLowerCase();
+                $('.card').each(function() {
+                    var c       = $(this),
+                        name    = c.data('name'),
+                        content = c.data('content');
+                    c.toggle(name.includes(kw) || content.includes(kw));
+                });
+                updateEmpty();
+            });
+
+            // Filter unviewed only
+            $('#btnFilter').click(function() {
+                $('.card').each(function() {
+                    var c = $(this);
+                    // data-isviewed is boolean false for unviewed
+                    c.toggle(c.data('isviewed') === false);
+                });
+                updateEmpty();
+            });
+        });
+    </script>
+}
+

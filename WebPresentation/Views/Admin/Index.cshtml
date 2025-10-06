@@ -1,0 +1,120 @@
+﻿<!--
+///<summary>
+/// Creator: Jacob McPherson
+/// Created: 2025/03/29
+/// Summary: View for viewing all users
+
+/// Last Updated By: Kate Rich
+/// Last Updated: 2025-04-26
+/// What Was Changed: Moved this view back to being in the directory Views -> Admin.
+
+/// Last Updated By: Skyann
+/// Last Updated: 2025-04-27
+/// What Was Changed: Styling added.
+
+/// Last Updated By: Dat Tran
+/// Last Updated: 2025-04-29
+/// What Was Changed: Sweet Alert added for editing a user.
+///
+///  Last Updated By: Kate Rich
+///  Last Updated: 2025-05-02
+///  What Was Changed: Updated the heading to say 'User Status' & put the Deactivate button back.
+/// </summary>
+-->
+@model IEnumerable<DataDomain.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">User Status</h1>
+@if(TempData["EditUser"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if(!sessionStorage.getItem('sweetAlertEditUserShown')){
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: '@TempData["EditUser"]'
+                });
+                sessionStorage.setItem('sweetAlertEditUserShown', 'true');
+            }
+        });
+    </script>
+    @* Remove the message so it doesn’t persist on refresh *@
+    TempData.Remove("EditUser");
+
+}
+else
+{
+    <script>
+        // Ensure the flag is reset if there's no success message
+        sessionStorage.removeItem('sweetAlertEditUserShown');
+    </script>
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.GivenName)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.FamilyName)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Suspended)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.ReadOnly)
+            </th>
+            <th class="header">
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th class="header"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suspended)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReadOnly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <a href="@Url.Action("Details", new { email = item.Email })" class="btn btn-primary btn-sm">Details</a>
+                        <a href="@Url.Action("Edit", new { email = item.Email })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Deactivate", new { email = item.Email })" class="btn btn-danger btn-sm">Deactivate</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
